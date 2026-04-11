@@ -6,287 +6,317 @@
     <title>Melodika | Music. Reimagined. Elevated.</title>
     <style>
         :root {
-            /* Exact Soft Gradient Mix from reference image */
+            /* Premium Soft Gradient Mix */
             --bg-gradient: linear-gradient(135deg, #A8E6CF 0%, #81D4FA 40%, #CE93D8 80%, #BA68C8 100%);
             --accent-glow: #ffffff;
             --main-text: #000000;
             --sub-text: rgba(0, 0, 0, 0.7);
             --border-glow: rgba(255, 255, 255, 0.2);
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.3);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            /* Apply continuous gradient based on reference image across the whole page */
             background: var(--bg-gradient);
             background-size: 200% 200%;
-            animation: gradientShift 15s ease infinite;
+            animation: gradientShift 20s ease infinite alternate;
             color: var(--main-text);
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* Continuous gradient shifting animation */
         @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
         }
 
-        /* The floating musical notes in background */
+        /* Floating background elements */
         .background-notes {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: -1; overflow: hidden;
         }
 
-        /* Scatter glowing notes and orbs for premium feel */
         .floating-orb {
             position: absolute;
             background-color: var(--accent-glow);
             border-radius: 50%;
-            opacity: 0.2;
-            filter: blur(3px);
-            animation: glowPulse 4s infinite alternate;
+            opacity: 0.15;
+            filter: blur(4px);
+            animation: glowPulse 5s infinite alternate ease-in-out;
         }
 
-        /* Main Scroll Container */
-        main {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            align-items: center;
+        @keyframes glowPulse { 
+            from { transform: scale(1); opacity: 0.15; filter: blur(4px); } 
+            to { transform: scale(1.5); opacity: 0.3; filter: blur(8px); } 
         }
 
-        /* Generic Section Styling */
+        /* General Layout */
+        main { display: flex; flex-direction: column; width: 100%; align-items: center; }
+
         section {
             min-height: 100vh;
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 60px;
-            scroll-snap-align: start;
+            padding: 80px 5%;
+            scroll-snap-align: center;
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease, transform 1s ease;
+            transform: translateY(40px);
+            transition: opacity 1.2s cubic-bezier(0.165, 0.84, 0.44, 1), transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+            max-width: 1300px;
+            margin: 0 auto;
         }
 
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
+        section.visible { opacity: 1; transform: translateY(0); }
+
+        /* Premium Image Grip & Rendering */
+        img {
+            -webkit-user-drag: none;
+            user-select: none;
+            image-rendering: crisp-edges;
+            image-rendering: -webkit-optimize-contrast;
+            will-change: transform;
         }
 
-        /* --- Section 1: Hero View (Gallery of App Photos) --- */
+        /* --- Section 1: Hero View --- */
         #gallery {
-            padding: 40px;
+            display: flex;
+            gap: 50px;
+            flex-wrap: nowrap;
+            align-items: center;
         }
 
-        /* The main hero block text */
         .hero-text-block {
-            text-align: left;
-            max-width: 500px;
-            padding-right: 40px;
-            animation: fadeIn 1s ease-out;
+            flex: 1;
+            min-width: 320px;
+            max-width: 550px;
+            animation: fadeIn 1.5s ease-out forwards;
         }
 
         .main-heading {
-            font-size: 3.5rem;
-            font-weight: 700;
-            letter-spacing: -2px;
-            margin-bottom: 5px;
-            font-family: -apple-system, BlinkMacSystemFont, serif;
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -2.5px;
+            margin-bottom: 10px;
+            line-height: 1.1;
         }
 
         .tagline {
-            font-size: 1.5rem;
-            font-weight: 400;
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+            font-weight: 500;
             margin-bottom: 25px;
-            color: var(--main-text);
+            letter-spacing: -0.5px;
         }
 
         .main-body-copy {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             line-height: 1.6;
             color: var(--sub-text);
             margin-bottom: 40px;
         }
 
-        /* Direct APK download button on hero page */
         .btn-apk-download {
-            display: inline-block;
-            background: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             color: #000;
-            padding: 18px 50px;
+            padding: 18px 45px;
             border-radius: 100px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1.1rem;
-            transition: all 0.3s ease;
-            margin-top: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255,255,255,0.5);
         }
 
-        .btn-apk-download:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--accent-glow); }
+        .btn-apk-download:hover { 
+            transform: translateY(-5px) scale(1.02); 
+            box-shadow: 0 20px 40px rgba(255,255,255,0.4), inset 0 0 0 1px rgba(255,255,255,0.8); 
+        }
 
-        /* Integrated safety note */
         .apk-safety-note {
-            margin-top: 30px;
-            font-size: 0.8rem;
-            color: rgba(0, 0, 0, 0.5);
+            margin-top: 25px;
+            font-size: 0.85rem;
+            color: rgba(0, 0, 0, 0.65);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            border-radius: 16px;
+            border: 1px solid var(--border-glow);
             max-width: 450px;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
-        /* The Photo Gallery Cluster from reference image */
+        /* Hero Phones Area */
         .photo-gallery-cluster {
+            flex: 1;
             position: relative;
             width: 100%;
+            min-width: 350px;
             max-width: 650px;
-            height: 500px;
-            animation: slideInFromRight 1.2s ease-out;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .hero-phone {
             position: absolute;
-            transition: transform 0.5s ease;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            border-radius: 40px; /* Stronger edge grip */
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.2);
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        /* The player phone (center) */
         .phone-center {
-            width: 200px;
-            left: 50%;
-            transform: translateX(-50%) rotate(0deg);
+            width: clamp(200px, 45%, 260px);
             z-index: 5;
-            animation: kenBurnsFade 6s ease infinite alternate;
+            animation: floatCenter 8s ease-in-out infinite;
         }
 
-        /* An angled library phone (left) */
         .phone-left {
-            width: 160px;
-            left: 50%;
-            transform: translateX(-160px) rotate(-15deg);
+            width: clamp(160px, 35%, 210px);
+            transform: translateX(-55%) rotate(-8deg);
             z-index: 2;
-            animation: kenBurnsFade 6s ease infinite alternate-reverse;
+            animation: floatSideLeft 9s ease-in-out infinite;
+            filter: brightness(0.95);
         }
 
-        /* Another library phone (right) */
         .phone-right {
-            width: 160px;
-            left: 50%;
-            transform: translateX(160px) rotate(15deg);
+            width: clamp(160px, 35%, 210px);
+            transform: translateX(55%) rotate(8deg);
             z-index: 2;
-            animation: kenBurnsFade 6s ease infinite alternate;
+            animation: floatSideRight 10s ease-in-out infinite;
+            filter: brightness(0.95);
         }
 
-        /* Ken Burns subtle zoom for dynamic effect */
-        @keyframes kenBurnsFade {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.03) rotate(0.5deg); opacity: 0.98; }
-            100% { transform: scale(1); opacity: 1; }
-        }
+        @keyframes floatCenter { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @keyframes floatSideLeft { 0%, 100% { transform: translateX(-55%) translateY(0) rotate(-8deg); } 50% { transform: translateX(-55%) translateY(-15px) rotate(-10deg); } }
+        @keyframes floatSideRight { 0%, 100% { transform: translateX(55%) translateY(0) rotate(8deg); } 50% { transform: translateX(55%) translateY(-15px) rotate(10deg); } }
 
-        /* --- Section 2: Library (Dark vs Light Theme) --- */
-        #features-library {
-            flex-direction: column;
-            text-align: center;
-        }
-
-        /* Label styling */
+        /* --- Features Sections --- */
+        .section-content { display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%; }
+        
         .section-label {
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 0.95rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
             color: var(--main-text);
+            opacity: 0.8;
         }
 
-        /* Section descriptions */
-        .section-desc {
-            font-size: 1.1rem;
-            color: var(--sub-text);
-            max-width: 600px;
-            margin-bottom: 50px;
-        }
+        .section-desc { font-size: 1.2rem; color: var(--sub-text); max-width: 650px; margin-bottom: 60px; line-height: 1.6; }
 
-        /* Two phones side-by-side */
+        /* Split Phones Setup */
         .split-phone-view {
             display: flex;
-            gap: 40px;
+            gap: 50px;
             justify-content: center;
-            max-width: 800px;
             width: 100%;
+            perspective: 1000px;
         }
 
         .sleek-phone {
-            width: 40%;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            width: clamp(220px, 30vw, 320px);
+            border-radius: 40px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(255,255,255,0.1);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform: translateZ(0);
         }
 
-        /* --- Section 3: Adaptive Player --- */
-        #features-player {
-            flex-direction: column;
-            text-align: center;
-        }
+        .sleek-phone:hover { transform: translateY(-15px) scale(1.03) rotateX(5deg); box-shadow: 0 50px 100px rgba(0,0,0,0.4); }
 
+        /* Adaptive Player Display */
         .immersive-player-mockup {
-            width: 100%;
-            max-width: 300px;
-            border-radius: 30px;
-            overflow: hidden;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.8);
-            margin-bottom: 50px;
+            width: clamp(250px, 40vw, 350px);
+            border-radius: 45px;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.15);
+            margin-bottom: 60px;
+            transition: transform 0.6s ease;
         }
+        .immersive-player-mockup:hover { transform: scale(1.02) translateY(-10px); }
+        .immersive-player-mockup img { width: 100%; display: block; border-radius: inherit; }
 
-        /* Horizontal feature points */
-        .feature-points-horizontal {
-            display: flex;
-            gap: 15px;
-            max-width: 600px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+        /* Custom Premium SVG Features */
+        .feature-points-horizontal { display: flex; gap: 20px; max-width: 800px; flex-wrap: wrap; justify-content: center; }
 
         .feature-item-pale {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-glow);
-            padding: 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            padding: 14px 28px;
+            border-radius: 100px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--main-text);
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            cursor: default;
         }
 
-        /* --- Final Footer --- */
-        footer {
-            width: 100%;
-            text-align: center;
-            padding: 40px;
-            font-size: 0.9rem;
-            color: rgba(0, 0, 0, 0.4);
+        .feature-item-pale svg { width: 22px; height: 22px; stroke: #000; }
+
+        .feature-item-pale:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes slideInFromRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
-        @keyframes glowPulse { from { opacity: 0.2; filter: blur(3px); } to { opacity: 0.3; filter: blur(5px); } }
+        footer { padding: 40px; font-size: 1rem; font-weight: 500; color: rgba(0,0,0,0.5); text-align: center; }
 
+        /* ========================================= */
+        /* 📱 RESPONSIVE DESIGN (TABLET & MOBILE) 📱 */
+        /* ========================================= */
+
+        @media (max-width: 1024px) {
+            #gallery { flex-direction: column; text-align: center; padding-top: 120px; }
+            .hero-text-block { max-width: 100%; align-items: center; display: flex; flex-direction: column; }
+            .main-heading { font-size: 3.5rem; }
+            .apk-safety-note { margin-left: auto; margin-right: auto; }
+            .photo-gallery-cluster { height: 500px; margin-top: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 60px 20px; }
+            .main-heading { font-size: 2.8rem; }
+            .photo-gallery-cluster { height: 400px; }
+            
+            /* Overriding complex animations for mobile layout stability */
+            .phone-center { width: 200px; }
+            .phone-left { width: 160px; transform: translateX(-40%) rotate(-6deg); animation: none; }
+            .phone-right { width: 160px; transform: translateX(40%) rotate(6deg); animation: none; }
+            
+            .split-phone-view { flex-direction: column; align-items: center; gap: 30px; }
+            .sleek-phone { width: 75%; max-width: 280px; }
+            .feature-points-horizontal { gap: 12px; }
+            .feature-item-pale { padding: 12px 20px; font-size: 0.9rem; }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
     <div class="background-notes">
-        <div class="floating-orb" style="width: 10px; height: 10px; top: 15%; left: 8%; animation-delay: 0s;"></div>
-        <div class="floating-orb" style="width: 25px; height: 25px; top: 35%; right: 12%; animation-delay: 1s;"></div>
-        <div class="floating-orb" style="width: 15px; height: 15px; top: 60%; left: 20%; animation-delay: 2s;"></div>
-        <div class="floating-orb" style="width: 20px; height: 20px; top: 75%; right: 25%; animation-delay: 3s;"></div>
-        <img src="floating_note_soft.png" style="position: absolute; width: 20px; top: 10%; left: 5%; opacity: 0.3;">
+        <div class="floating-orb" style="width: 15px; height: 15px; top: 20%; left: 10%; animation-delay: 0s;"></div>
+        <div class="floating-orb" style="width: 30px; height: 30px; top: 40%; right: 15%; animation-delay: 1.5s;"></div>
+        <div class="floating-orb" style="width: 20px; height: 20px; top: 70%; left: 25%; animation-delay: 3s;"></div>
     </div>
 
     <main>
@@ -296,7 +326,7 @@
                 <p class="tagline">Music. Reimagined. Elevated.</p>
                 <p class="main-body-copy">Your entire music library, curated and elevated with an intelligent, intuitive experience.</p>
                 
-                <a href="PASTE_YOUR_RELEASE_LINK_HERE" class="btn-apk-download">Download v1.0.0 APK</a>
+                <a href="https://github.com/afakeprince/Melodika/releases/download/v1.0.0/melodika_v1.0.0.apk" class="btn-apk-download">Download v1.0.0 APK</a>
                 
                 <div class="apk-safety-note">
                     <b>Note:</b> Since this is an indie app not on Play Store, you will see a 'Play Protect' warning. Melodika is 100% safe. Tap <b>More Details</b> then <b>Install Anyway</b>.
@@ -304,35 +334,51 @@
             </div>
 
             <div class="photo-gallery-cluster">
-                <img src="phone_mockup_player.png" alt="Immersive Adaptive Player" class="hero-phone phone-center">
                 <img src="phone_mockup_dark_theme.png" alt="Sleek Dark Theme" class="hero-phone phone-left">
                 <img src="phone_mockup_light_theme.png" alt="Sleek Light Theme" class="hero-phone phone-right">
+                <img src="phone_mockup_player.png" alt="Immersive Adaptive Player" class="hero-phone phone-center">
             </div>
         </section>
 
         <section id="features-library">
-            <h2 class="section-label">Intelligent Library with Dark & Light Themes</h2>
-            <p class="section-desc">Experience a sleek user interface that adapts to your environment. Choose from elegant Pitch Black for AMOLED screens or pristine Light theme for daytime clarity.</p>
-            
-            <div class="split-phone-view">
-                <img src="phone_mockup_dark_list.png" alt="Sleek User Interface" class="sleek-phone">
-                <img src="phone_mockup_light_list.png" alt="Sleek User Interface" class="sleek-phone">
+            <div class="section-content">
+                <h2 class="section-label">Intelligent Library</h2>
+                <p class="section-desc">Experience a sleek user interface that adapts to your environment. Choose from elegant Pitch Black for AMOLED screens or pristine Light theme for daytime clarity.</p>
+                
+                <div class="split-phone-view">
+                    <img src="phone_mockup_dark_list.png" alt="Dark Interface" class="sleek-phone">
+                    <img src="phone_mockup_light_list.png" alt="Light Interface" class="sleek-phone">
+                </div>
             </div>
         </section>
 
         <section id="features-player">
-            <h2 class="section-label">Immersive Adaptive Player</h2>
-            <p class="section-desc">Get lost in the music with our unique player. Sync lyrics seamlessly and experience the most responsive, Zero Lag UI of any music player.</p>
-            
-            <div class="immersive-player-mockup">
-                <img src="phone_mockup_player_v2.png" alt="Immersive Adaptive Player Interface" style="width: 100%;">
-            </div>
+            <div class="section-content">
+                <h2 class="section-label">Immersive Adaptive Player</h2>
+                <p class="section-desc">Get lost in the music with our unique player. Sync lyrics seamlessly and experience the most responsive, Zero Lag UI of any music player.</p>
+                
+                <div class="immersive-player-mockup">
+                    <img src="phone_mockup_player_v2.png" alt="Adaptive Player">
+                </div>
 
-            <div class="feature-points-horizontal">
-                <div class="feature-item-pale">🌑 Pitch Black Theme</div>
-                <div class="feature-item-pale">📂 Folder-wise Play</div>
-                <div class="feature-item-pale">🎙️ Sync Lyrics</div>
-                <div class="feature-item-pale">⚡ Zero Lag UI</div>
+                <div class="feature-points-horizontal">
+                    <div class="feature-item-pale">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                        Pitch Black Theme
+                    </div>
+                    <div class="feature-item-pale">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                        Folder-wise Play
+                    </div>
+                    <div class="feature-item-pale">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                        Sync Lyrics
+                    </div>
+                    <div class="feature-item-pale">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                        Zero Lag UI
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -343,25 +389,18 @@
     </main>
 
     <script>
-        // Smooth scrolling snap observer
         const sections = document.querySelectorAll('section');
-        const observerOptions = {
-            threshold: 0.3
-        };
+        const observerOptions = { threshold: 0.25 };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                } else {
-                    entry.target.classList.remove('visible');
                 }
             });
         }, observerOptions);
 
-        sections.forEach(section => {
-            observer.observe(section);
-        });
+        sections.forEach(section => { observer.observe(section); });
     </script>
 </body>
 </html>
