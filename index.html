@@ -6,362 +6,219 @@
     <title>Melodika | Music. Reimagined. Elevated.</title>
     <style>
         :root {
-            /* Exact Soft Gradient Mix from reference image */
             --bg-gradient: linear-gradient(135deg, #A8E6CF 0%, #81D4FA 40%, #CE93D8 80%, #BA68C8 100%);
             --accent-glow: #ffffff;
             --main-text: #000000;
             --sub-text: rgba(0, 0, 0, 0.7);
             --border-glow: rgba(255, 255, 255, 0.2);
+            --glass-bg: rgba(255, 255, 255, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            /* Apply continuous gradient based on reference image across the whole page */
             background: var(--bg-gradient);
-            background-size: 200% 200%;
-            animation: gradientShift 15s ease infinite;
+            background-size: 300% 300%;
+            animation: gradientShift 20s ease infinite;
             color: var(--main-text);
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        /* Continuous gradient shifting animation */
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        /* The floating musical notes in background */
-        .background-notes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        /* Scatter glowing notes and orbs for premium feel */
+        /* Floating Particles Background */
+        .background-notes { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
         .floating-orb {
-            position: absolute;
-            background-color: var(--accent-glow);
-            border-radius: 50%;
-            opacity: 0.2;
-            filter: blur(3px);
-            animation: glowPulse 4s infinite alternate;
+            position: absolute; background-color: var(--accent-glow); border-radius: 50%;
+            opacity: 0.3; filter: blur(4px); animation: floatOrb 6s infinite alternate ease-in-out;
         }
+        @keyframes floatOrb { 0% { transform: translateY(0px) scale(1); opacity: 0.2; } 100% { transform: translateY(-30px) scale(1.2); opacity: 0.5; } }
 
-        /* Main Scroll Container */
-        main {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            align-items: center;
-        }
+        /* Container for strict layout */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* Generic Section Styling */
+        /* --- Section Styling --- */
         section {
-            min-height: 100vh;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 60px;
-            scroll-snap-align: start;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease, transform 1s ease;
+            min-height: 100vh; display: flex; justify-content: center; align-items: center;
+            padding: 80px 0; scroll-snap-align: start;
+            opacity: 0; transform: translateY(40px); transition: opacity 1s ease-out, transform 1s ease-out;
         }
+        section.visible { opacity: 1; transform: translateY(0); }
 
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        /* --- Hero Section --- */
+        .hero-layout { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 40px; }
+        
+        .hero-text-block { flex: 1; max-width: 500px; z-index: 10; }
+        .main-heading { font-size: 4.5rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 10px; text-shadow: 0 10px 30px rgba(255,255,255,0.4); }
+        .tagline { font-size: 1.8rem; font-weight: 500; margin-bottom: 20px; }
+        .main-body-copy { font-size: 1.1rem; line-height: 1.6; color: var(--sub-text); margin-bottom: 35px; }
 
-        /* --- Section 1: Hero View (Gallery of App Photos) --- */
-        #gallery {
-            padding: 40px;
-        }
-
-        /* The main hero block text */
-        .hero-text-block {
-            text-align: left;
-            max-width: 500px;
-            padding-right: 40px;
-            animation: fadeIn 1s ease-out;
-        }
-
-        .main-heading {
-            font-size: 3.5rem;
-            font-weight: 700;
-            letter-spacing: -2px;
-            margin-bottom: 5px;
-            font-family: -apple-system, BlinkMacSystemFont, serif;
-        }
-
-        .tagline {
-            font-size: 1.5rem;
-            font-weight: 400;
-            margin-bottom: 25px;
-            color: var(--main-text);
-        }
-
-        .main-body-copy {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: var(--sub-text);
-            margin-bottom: 40px;
-        }
-
-        /* Direct APK download button on hero page */
+        /* Animated Download Button */
         .btn-apk-download {
-            display: inline-block;
-            background: #ffffff;
-            color: #000;
-            padding: 18px 50px;
-            border-radius: 100px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            margin-top: 20px;
+            display: inline-block; background: rgba(255, 255, 255, 0.9); color: #000;
+            padding: 18px 45px; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 1.1rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            animation: pulseSoft 3s infinite;
         }
+        .btn-apk-download:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(255,255,255,0.4); }
+        @keyframes pulseSoft { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.4); } 70% { box-shadow: 0 0 0 15px rgba(255,255,255,0); } 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); } }
 
-        .btn-apk-download:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--accent-glow); }
-
-        /* Integrated safety note */
         .apk-safety-note {
-            margin-top: 30px;
-            font-size: 0.8rem;
-            color: rgba(0, 0, 0, 0.5);
-            max-width: 450px;
-            line-height: 1.4;
+            margin-top: 25px; font-size: 0.85rem; color: rgba(0,0,0,0.6); background: var(--glass-bg);
+            padding: 15px; border-radius: 12px; border: 1px solid var(--border-glow); backdrop-filter: blur(10px);
         }
 
-        /* The Photo Gallery Cluster from reference image */
-        .photo-gallery-cluster {
-            position: relative;
-            width: 100%;
-            max-width: 650px;
-            height: 500px;
-            animation: slideInFromRight 1.2s ease-out;
-        }
+        /* Hero Image Cluster with Float Animation */
+        .photo-gallery-cluster { flex: 1; position: relative; height: 500px; display: flex; justify-content: center; align-items: center; }
+        .hero-phone { position: absolute; border-radius: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.4); transition: transform 0.5s ease; }
+        
+        .phone-center { width: 240px; z-index: 5; animation: floatMain 6s ease-in-out infinite; }
+        .phone-left { width: 200px; transform: translateX(-110px) rotate(-10deg) scale(0.9); z-index: 2; opacity: 0.9; }
+        .phone-right { width: 200px; transform: translateX(110px) rotate(10deg) scale(0.9); z-index: 2; opacity: 0.9; }
 
-        .hero-phone {
-            position: absolute;
-            transition: transform 0.5s ease;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-        }
+        @keyframes floatMain { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        /* The player phone (center) */
-        .phone-center {
-            width: 200px;
-            left: 50%;
-            transform: translateX(-50%) rotate(0deg);
-            z-index: 5;
-            animation: kenBurnsFade 6s ease infinite alternate;
-        }
+        /* --- Features Section --- */
+        .feature-layout { flex-direction: column; text-align: center; width: 100%; }
+        .section-label { font-size: 2.2rem; font-weight: 700; margin-bottom: 15px; }
+        .section-desc { font-size: 1.1rem; color: var(--sub-text); max-width: 650px; margin: 0 auto 50px auto; line-height: 1.6; }
 
-        /* An angled library phone (left) */
-        .phone-left {
-            width: 160px;
-            left: 50%;
-            transform: translateX(-160px) rotate(-15deg);
-            z-index: 2;
-            animation: kenBurnsFade 6s ease infinite alternate-reverse;
-        }
+        .split-phone-view { display: flex; gap: 40px; justify-content: center; width: 100%; align-items: center; }
+        .sleek-phone { width: 260px; border-radius: 30px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); transition: transform 0.4s ease; }
+        .sleek-phone:hover { transform: translateY(-10px) scale(1.02); }
 
-        /* Another library phone (right) */
-        .phone-right {
-            width: 160px;
-            left: 50%;
-            transform: translateX(160px) rotate(15deg);
-            z-index: 2;
-            animation: kenBurnsFade 6s ease infinite alternate;
-        }
+        .immersive-player-mockup img { width: 280px; border-radius: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.4); margin-bottom: 40px; animation: floatMain 8s ease-in-out infinite alternate; }
 
-        /* Ken Burns subtle zoom for dynamic effect */
-        @keyframes kenBurnsFade {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.03) rotate(0.5deg); opacity: 0.98; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        /* --- Section 2: Library (Dark vs Light Theme) --- */
-        #features-library {
-            flex-direction: column;
-            text-align: center;
-        }
-
-        /* Label styling */
-        .section-label {
-            font-size: 1rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            color: var(--main-text);
-        }
-
-        /* Section descriptions */
-        .section-desc {
-            font-size: 1.1rem;
-            color: var(--sub-text);
-            max-width: 600px;
-            margin-bottom: 50px;
-        }
-
-        /* Two phones side-by-side */
-        .split-phone-view {
-            display: flex;
-            gap: 40px;
-            justify-content: center;
-            max-width: 800px;
-            width: 100%;
-        }
-
-        .sleek-phone {
-            width: 40%;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
-
-        /* --- Section 3: Adaptive Player --- */
-        #features-player {
-            flex-direction: column;
-            text-align: center;
-        }
-
-        .immersive-player-mockup {
-            width: 100%;
-            max-width: 300px;
-            border-radius: 30px;
-            overflow: hidden;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.8);
-            margin-bottom: 50px;
-        }
-
-        /* Horizontal feature points */
-        .feature-points-horizontal {
-            display: flex;
-            gap: 15px;
-            max-width: 600px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
+        .feature-points-horizontal { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
         .feature-item-pale {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-glow);
-            padding: 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: rgba(0, 0, 0, 0.8);
+            background: var(--glass-bg); border: 1px solid var(--border-glow); padding: 12px 25px;
+            border-radius: 30px; font-weight: 600; backdrop-filter: blur(10px); transition: all 0.3s ease;
+        }
+        .feature-item-pale:hover { background: rgba(255,255,255,0.2); transform: translateY(-3px); }
+
+        footer { text-align: center; padding: 40px; color: var(--sub-text); font-weight: 500; }
+
+        /* =========================================
+           MOBILE & TABLET OPTIMIZATION (RESPONSIVE)
+           ========================================= */
+        
+        /* TABLET */
+        @media (max-width: 992px) {
+            .hero-layout { flex-direction: column; text-align: center; padding-top: 50px; }
+            .hero-text-block { padding: 0; max-width: 100%; margin-bottom: 40px; }
+            .main-heading { font-size: 3.5rem; }
+            .apk-safety-note { margin: 25px auto 0 auto; }
+            .photo-gallery-cluster { height: 400px; transform: scale(0.9); margin-top: 20px; }
         }
 
-        /* --- Final Footer --- */
-        footer {
-            width: 100%;
-            text-align: center;
-            padding: 40px;
-            font-size: 0.9rem;
-            color: rgba(0, 0, 0, 0.4);
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .main-heading { font-size: 2.8rem; }
+            .tagline { font-size: 1.4rem; }
+            .photo-gallery-cluster { height: 320px; transform: scale(0.7); margin-top: 0; }
+            
+            section { padding: 60px 0; min-height: auto; }
+            .split-phone-view { flex-direction: column; gap: 30px; }
+            .sleek-phone { width: 70%; max-width: 250px; }
+            
+            .immersive-player-mockup img { width: 70%; max-width: 250px; }
+            .section-label { font-size: 1.8rem; }
+            .feature-points-horizontal { gap: 10px; }
+            .feature-item-pale { padding: 10px 18px; font-size: 0.85rem; }
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes slideInFromRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
-        @keyframes glowPulse { from { opacity: 0.2; filter: blur(3px); } to { opacity: 0.3; filter: blur(5px); } }
-
+        /* SMALL MOBILE */
+        @media (max-width: 480px) {
+            .main-heading { font-size: 2.3rem; }
+            .photo-gallery-cluster { height: 250px; transform: scale(0.55); }
+        }
     </style>
 </head>
 <body>
 
     <div class="background-notes">
-        <div class="floating-orb" style="width: 10px; height: 10px; top: 15%; left: 8%; animation-delay: 0s;"></div>
-        <div class="floating-orb" style="width: 25px; height: 25px; top: 35%; right: 12%; animation-delay: 1s;"></div>
-        <div class="floating-orb" style="width: 15px; height: 15px; top: 60%; left: 20%; animation-delay: 2s;"></div>
-        <div class="floating-orb" style="width: 20px; height: 20px; top: 75%; right: 25%; animation-delay: 3s;"></div>
-        <img src="floating_note_soft.png" style="position: absolute; width: 20px; top: 10%; left: 5%; opacity: 0.3;">
+        <div class="floating-orb" style="width: 15px; height: 15px; top: 10%; left: 5%; animation-delay: 0s;"></div>
+        <div class="floating-orb" style="width: 35px; height: 35px; top: 40%; right: 10%; animation-delay: 1.5s;"></div>
+        <div class="floating-orb" style="width: 20px; height: 20px; top: 70%; left: 15%; animation-delay: 3s;"></div>
+        <div class="floating-orb" style="width: 25px; height: 25px; bottom: 10%; right: 20%; animation-delay: 4.5s;"></div>
     </div>
 
-    <main>
-        <section id="gallery">
-            <div class="hero-text-block">
-                <h1 class="main-heading">MELODIKA</h1>
-                <p class="tagline">Music. Reimagined. Elevated.</p>
-                <p class="main-body-copy">Your entire music library, curated and elevated with an intelligent, intuitive experience.</p>
-                
-                <a href="https://github.com/afakeprince/Melodika/releases/download/v1.0.0/melodika_v1.0.0.apk" class="btn-apk-download">Download v1.0.0 APK</a>
-                
-                <div class="apk-safety-note">
-                    <b>Note:</b> Since this is an indie app not on Play Store, you will see a 'Play Protect' warning. Melodika is 100% safe. Tap <b>More Details</b> then <b>Install Anyway</b>.
+    <div class="container">
+        <main>
+            <section id="gallery">
+                <div class="hero-layout">
+                    <div class="hero-text-block">
+                        <h1 class="main-heading">MELODIKA</h1>
+                        <p class="tagline">Music. Reimagined. Elevated.</p>
+                        <p class="main-body-copy">Your entire music library, curated and elevated with an intelligent, intuitive experience.</p>
+                        
+                        <a href="https://github.com/afakeprince/Melodika/releases/download/v1.0.0/melodika_v1.0.0.apk" class="btn-apk-download">Download v1.0.0 APK</a>
+                        
+                        <div class="apk-safety-note">
+                            <b>Note:</b> Since this is an indie app not on Play Store, you will see a 'Play Protect' warning. Melodika is 100% safe. Tap <b>More Details</b> then <b>Install Anyway</b>.
+                        </div>
+                    </div>
+
+                    <div class="photo-gallery-cluster">
+                        <img src="70432.png" alt="Immersive Adaptive Player" class="hero-phone phone-center">
+                        <img src="70434.png" alt="Sleek Dark Theme" class="hero-phone phone-left">
+                        <img src="70437.png" alt="Sleek Light Theme" class="hero-phone phone-right">
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="photo-gallery-cluster">
-                <img src="phone_mockup_player.png" alt="Immersive Adaptive Player" class="hero-phone phone-center">
-                <img src="phone_mockup_dark_theme.png" alt="Sleek Dark Theme" class="hero-phone phone-left">
-                <img src="phone_mockup_light_theme.png" alt="Sleek Light Theme" class="hero-phone phone-right">
-            </div>
-        </section>
+            <section id="features-library">
+                <div class="feature-layout">
+                    <h2 class="section-label">Intelligent Library Themes</h2>
+                    <p class="section-desc">Experience a sleek user interface that adapts to your environment. Choose from elegant Pitch Black for AMOLED screens or pristine Light theme for daytime clarity.</p>
+                    
+                    <div class="split-phone-view">
+                        <img src="70434.png" alt="Dark Library Interface" class="sleek-phone">
+                        <img src="70437.png" alt="Light Library Interface" class="sleek-phone">
+                    </div>
+                </div>
+            </section>
 
-        <section id="features-library">
-            <h2 class="section-label">Intelligent Library with Dark & Light Themes</h2>
-            <p class="section-desc">Experience a sleek user interface that adapts to your environment. Choose from elegant Pitch Black for AMOLED screens or pristine Light theme for daytime clarity.</p>
-            
-            <div class="split-phone-view">
-                <img src="phone_mockup_dark_list.png" alt="Sleek User Interface" class="sleek-phone">
-                <img src="phone_mockup_light_list.png" alt="Sleek User Interface" class="sleek-phone">
-            </div>
-        </section>
+            <section id="features-player">
+                <div class="feature-layout">
+                    <h2 class="section-label">Immersive Adaptive Player</h2>
+                    <p class="section-desc">Get lost in the music with our unique player. Sync lyrics seamlessly and experience the most responsive, Zero Lag UI of any music player.</p>
+                    
+                    <div class="immersive-player-mockup">
+                        <img src="70442.png" alt="Adaptive Player Interface">
+                    </div>
 
-        <section id="features-player">
-            <h2 class="section-label">Immersive Adaptive Player</h2>
-            <p class="section-desc">Get lost in the music with our unique player. Sync lyrics seamlessly and experience the most responsive, Zero Lag UI of any music player.</p>
-            
-            <div class="immersive-player-mockup">
-                <img src="phone_mockup_player_v2.png" alt="Immersive Adaptive Player Interface" style="width: 100%;">
-            </div>
+                    <div class="feature-points-horizontal">
+                        <div class="feature-item-pale">🌑 Pitch Black Theme</div>
+                        <div class="feature-item-pale">📂 Folder-wise Play</div>
+                        <div class="feature-item-pale">🎙️ Sync Lyrics</div>
+                        <div class="feature-item-pale">⚡ Zero Lag UI</div>
+                    </div>
+                </div>
+            </section>
 
-            <div class="feature-points-horizontal">
-                <div class="feature-item-pale">🌑 Pitch Black Theme</div>
-                <div class="feature-item-pale">📂 Folder-wise Play</div>
-                <div class="feature-item-pale">🎙️ Sync Lyrics</div>
-                <div class="feature-item-pale">⚡ Zero Lag UI</div>
-            </div>
-        </section>
-
-        <footer>
-            Created by Prince Verma
-        </footer>
-
-    </main>
+            <footer>
+                Created by Prince Verma
+            </footer>
+        </main>
+    </div>
 
     <script>
-        // Smooth scrolling snap observer
+        // Smooth scroll reveal animations
         const sections = document.querySelectorAll('section');
-        const observerOptions = {
-            threshold: 0.3
-        };
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                } else {
-                    entry.target.classList.remove('visible');
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.15 });
 
-        sections.forEach(section => {
-            observer.observe(section);
-        });
+        sections.forEach(section => observer.observe(section));
     </script>
 </body>
 </html>
