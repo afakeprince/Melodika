@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melodika | Experience Pure Music</title>
+    <style>
+        :root {
+            --bg: #000000;
+            --accent: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        /* Glassmorphism Effect */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 40px;
+            padding: 40px 20px;
+            width: 90%;
+            max-width: 450px;
+            margin-top: 60px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+        }
+
+        h1 { font-size: 2.8rem; font-weight: 700; letter-spacing: -1.5px; margin-bottom: 10px; }
+        p { color: rgba(255,255,255,0.6); font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px; }
+
+        .btn-download {
+            display: inline-block;
+            background: var(--accent);
+            color: #000;
+            padding: 18px 45px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-download:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+
+        .screenshot-container {
+            margin-top: 50px;
+            width: 100%;
+            max-width: 300px;
+            border-radius: 30px;
+            border: 6px solid #1a1a1a;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+        }
+
+        .screenshot-container img { width: 100%; display: block; }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 40px;
+            width: 90%;
+            max-width: 450px;
+        }
+
+        .feature-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 24px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .warning-box {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
+            padding: 0 30px;
+            line-height: 1.4;
+        }
+
+        .footer { margin: 60px 0 30px; font-size: 0.9rem; color: rgba(255,255,255,0.3); }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glass-card">
+        <img src="logo.png" alt="Melodika Logo" class="logo">
+        <h1>Melodika</h1>
+        <p>Offline. Ad-free. Pure. <br>The music player your collection deserves.</p>
+        
+        <a href="PASTE_YOUR_RELEASE_LINK_HERE" class="btn-download">Download v1.0.0</a>
+        
+        <div class="warning-box">
+            Note: If Android shows a "Play Protect" warning, tap <b>More Details</b> then <b>Install Anyway</b>. We are 100% safe.
+        </div>
+    </div>
+
+    <div class="screenshot-container">
+        <img src="screenshot.png" alt="Melodika App Interface">
+    </div>
+
+    <div class="features">
+        <div class="feature-item">🌑 Pitch Black Theme</div>
+        <div class="feature-item">📂 Folder-wise Play</div>
+        <div class="feature-item">🎙️ Sync Lyrics</div>
+        <div class="feature-item">⚡ Zero Lag UI</div>
+    </div>
+
+    <div class="footer">Created by Prince Verma</div>
+
+</body>
+</html>
