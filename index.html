@@ -23,7 +23,7 @@
             background-size: 200% 200%;
             animation: gradientShift 20s ease infinite alternate;
             color: var(--main-text);
-            /* Removed ALL Apple Fonts. Using clean, universal sans-serif */
+            /* Clean, universal sans-serif */
             font-family: Roboto, "Segoe UI", Arial, sans-serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
@@ -53,10 +53,14 @@
             animation: glowPulse 5s infinite alternate ease-in-out;
         }
 
-        /* SVG Musical Notes floating effect */
+        /* SVG Musical Notes floating effect - SHAPES FIXED */
         .svg-note {
             position: absolute;
-            fill: rgba(255, 255, 255, 0.35);
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.65);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
             animation: floatUpDown 8s infinite ease-in-out;
             filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
         }
@@ -162,6 +166,12 @@
             box-shadow: 0 20px 40px rgba(255,255,255,0.4), inset 0 0 0 1px rgba(255,255,255,0.8); 
         }
 
+        /* Mobile Click Effect for APK Button */
+        .btn-apk-download:active {
+            transform: scale(0.95) !important;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2) !important;
+        }
+
         .apk-safety-note {
             margin-top: 25px;
             font-size: 0.85rem;
@@ -195,12 +205,6 @@
             transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        .phone-center {
-            width: clamp(200px, 45%, 260px);
-            z-index: 5;
-            animation: floatCenter 8s ease-in-out infinite;
-        }
-
         .phone-left {
             width: clamp(160px, 35%, 210px);
             transform: translateX(-55%) rotate(-8deg);
@@ -217,7 +221,6 @@
             filter: drop-shadow(0 20px 30px rgba(0,0,0,0.3)) brightness(0.95);
         }
 
-        @keyframes floatCenter { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
         @keyframes floatSideLeft { 0%, 100% { transform: translateX(-55%) translateY(0) rotate(-8deg); } 50% { transform: translateX(-55%) translateY(-15px) rotate(-10deg); } }
         @keyframes floatSideRight { 0%, 100% { transform: translateX(55%) translateY(0) rotate(8deg); } 50% { transform: translateX(55%) translateY(-15px) rotate(10deg); } }
 
@@ -339,6 +342,10 @@
         }
 
         .insta-btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 20px rgba(220, 39, 67, 0.5); }
+        
+        /* Mobile Click Effect for Insta Button */
+        .insta-btn:active { transform: scale(0.95) !important; box-shadow: 0 4px 10px rgba(220, 39, 67, 0.4) !important; }
+        
         .insta-btn svg { width: 18px; height: 18px; fill: currentColor; }
 
         /* ========================================= */
@@ -354,12 +361,14 @@
         }
 
         @media (max-width: 768px) {
-            section { padding: 60px 20px; }
+            /* Overlap Fixed: Removed min-height 100vh restriction and adjusted padding */
+            section { min-height: auto; padding: 100px 20px 60px; }
+            #gallery { justify-content: flex-start; }
+            
             .main-heading { font-size: 2.8rem; }
             .photo-gallery-cluster { height: 400px; }
             
             /* Overriding complex animations for mobile layout stability */
-            .phone-center { width: 180px; }
             .phone-left { width: 140px; transform: translateX(-45%) rotate(-6deg); animation: none; }
             .phone-right { width: 140px; transform: translateX(45%) rotate(6deg); animation: none; }
             
@@ -368,6 +377,9 @@
             .feature-points-horizontal { gap: 12px; }
             .feature-item-pale { padding: 12px 20px; font-size: 0.9rem; }
             .premium-footer { padding: 40px 15px; }
+            
+            /* Designed by position fixed */
+            .creator-badge p { font-size: 1rem; text-align: center; line-height: 1.5; padding-bottom: 8px; }
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -403,8 +415,7 @@
             <div class="photo-gallery-cluster">
                 <img src="phone_mockup_dark_theme.png" alt="Sleek Dark Theme" class="hero-phone phone-left">
                 <img src="phone_mockup_light_theme.png" alt="Sleek Light Theme" class="hero-phone phone-right">
-                <img src="phone_mockup_player.png" alt="Immersive Adaptive Player" class="hero-phone phone-center">
-            </div>
+                </div>
         </section>
 
         <section id="features-library">
