@@ -151,7 +151,7 @@
             gap: 15px;
             align-items: center;
             margin-bottom: 15px;
-            flex-wrap: wrap; /* Allows stacking on very small screens */
+            flex-wrap: wrap;
         }
 
         .btn-apk-download {
@@ -168,7 +168,6 @@
             font-size: 1.1rem;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 10px 25px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255,255,255,0.5);
-            /* Important for JS Ripple */
             position: relative;
             overflow: hidden;
         }
@@ -178,7 +177,6 @@
             box-shadow: 0 20px 40px rgba(255,255,255,0.4), inset 0 0 0 1px rgba(255,255,255,0.8); 
         }
 
-        /* Mobile Click Effect for APK Button */
         .btn-apk-download:active {
             transform: scale(0.95) !important;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2) !important;
@@ -191,7 +189,7 @@
             justify-content: center;
             background: linear-gradient(45deg, #333 0%, #111 100%);
             color: #fff;
-            padding: 18px 25px; /* Slightly shorter padding than download */
+            padding: 18px 25px; 
             border-radius: 100px;
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -240,7 +238,6 @@
             align-items: center;
         }
 
-        /* Perfect Edge Grip using drop-shadow */
         .hero-phone {
             position: absolute;
             filter: drop-shadow(0 30px 40px rgba(0,0,0,0.4));
@@ -408,27 +405,28 @@
             transform: translateY(40px); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             max-height: 85vh; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
             position: relative; border: 1px solid rgba(255,255,255,0.5);
-            display: flex; flex-direction: column;
+            display: flex; flex-direction: column; overflow: hidden;
         }
 
         .glass-modal.active .modal-content { transform: translateY(0); }
 
         .close-modal {
             position: absolute; top: 15px; right: 20px; font-size: 28px;
-            color: rgba(0,0,0,0.5); cursor: pointer; line-height: 1; transition: color 0.3s ease;
+            color: rgba(0,0,0,0.5); cursor: pointer; line-height: 1; transition: color 0.3s ease; z-index: 10;
         }
         .close-modal:hover { color: #000; }
 
         .modal-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 15px; letter-spacing: -1px; }
         .modal-desc { font-size: 1rem; color: var(--sub-text); line-height: 1.6; margin-bottom: 30px; font-style: italic; }
         
-        /* Modal Content Area (For scrolling long Terms/Privacy text) */
         .modal-scroll-area {
             overflow-y: auto; text-align: left; padding-right: 10px; font-size: 0.95rem; color: rgba(0,0,0,0.8); line-height: 1.6; font-style: normal;
         }
         .modal-scroll-area::-webkit-scrollbar { width: 6px; }
         .modal-scroll-area::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 10px; }
 
+        /* Support Tiers Container */
+        #support-tiers-container { display: flex; flex-direction: column; transition: opacity 0.3s ease; }
         .support-tiers { display: flex; flex-direction: column; gap: 15px; }
 
         .tier-btn {
@@ -440,53 +438,72 @@
             position: relative; overflow: hidden;
         }
         
-        .tier-btn span { opacity: 0.6; font-weight: 500; }
+        .tier-btn span { opacity: 0.6; font-weight: 500; pointer-events: none; }
         .tier-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-color: rgba(0,0,0,0.2); }
         .tier-btn:active { transform: scale(0.97); }
         
         .upi-hint { margin-top: 20px; font-size: 0.8rem; color: rgba(0,0,0,0.5); line-height: 1.4; }
+
+        /* BRANDED QR DISPLAY CONTAINER */
+        #qr-display-container {
+            display: none; flex-direction: column; align-items: center;
+            animation: fadeIn 0.4s ease forwards;
+        }
         
-        /* HIDDEN UPI ID TEXT - So users can still copy it without it being visibly obvious to scrapers */
-        .upi-id-text { font-weight: 700; user-select: all; color: #000; display: inline-block; background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;}
+        .qr-wrapper {
+            position: relative; background: #fff; padding: 15px;
+            border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: inline-block; margin-bottom: 20px;
+        }
+
+        .qr-wrapper img { display: block; width: 200px; height: 200px; border-radius: 10px; }
+        
+        /* The custom Melodika Logo in the center of the QR code */
+        .qr-center-logo {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 45px; height: 45px; background: var(--bg-gradient);
+            border-radius: 12px; border: 3px solid #fff;
+            display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); color: #fff;
+        }
+
+        .qr-center-logo svg { width: 22px; height: 22px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+        .qr-amount-text { font-size: 1.5rem; font-weight: 800; color: #000; margin-bottom: 5px; }
+        .qr-scan-text { font-size: 0.95rem; color: var(--sub-text); margin-bottom: 20px; }
+
+        .btn-back-tiers {
+            background: rgba(0,0,0,0.05); color: #000; border: none;
+            padding: 10px 25px; border-radius: 100px; font-weight: 600;
+            font-size: 0.95rem; cursor: pointer; transition: all 0.3s ease;
+        }
+        .btn-back-tiers:hover { background: rgba(0,0,0,0.1); transform: translateY(-2px); }
 
         /* Mobile Ripple Effect Animation (CSS Part) */
         .ripple-effect {
-            position: absolute;
-            border-radius: 50%;
-            transform: scale(0);
-            animation: ripple-animation 0.6s linear;
-            background-color: rgba(255, 255, 255, 0.4);
-            pointer-events: none;
+            position: absolute; border-radius: 50%; transform: scale(0);
+            animation: ripple-animation 0.6s linear; background-color: rgba(255, 255, 255, 0.4); pointer-events: none;
         }
-        @keyframes ripple-animation {
-            to { transform: scale(4); opacity: 0; }
-        }
+        @keyframes ripple-animation { to { transform: scale(4); opacity: 0; } }
 
         /* ========================================= */
         /* 📱 RESPONSIVE DESIGN (TABLET & MOBILE) 📱 */
         /* ========================================= */
-
-        /* CHANGED: 1024px to 900px so "Desktop Site" on mobile works perfectly! */
         @media (max-width: 900px) {
             #gallery { flex-direction: column; text-align: center; padding-top: 120px; }
             .hero-text-block { max-width: 100%; align-items: center; display: flex; flex-direction: column; }
-            .hero-buttons-row { justify-content: center; } /* Center buttons on tablet */
+            .hero-buttons-row { justify-content: center; } 
             .main-heading { font-size: 3.5rem; }
             .apk-safety-note { margin-left: auto; margin-right: auto; }
             .photo-gallery-cluster { height: 500px; margin-top: 40px; }
         }
 
         @media (max-width: 768px) {
-            /* OVERLAP FIXED: Removed min-height constraint and added padding bottom */
             section { min-height: auto; padding: 100px 20px 80px; }
             #gallery { justify-content: flex-start; padding-bottom: 60px; }
-            
             .main-heading { font-size: 2.8rem; }
-            
-            /* OVERLAP FIXED: Adjusted gallery height and margin-top */
             .photo-gallery-cluster { height: 380px; margin-top: 60px; }
             
-            /* Adjusted transforms to push phones down slightly to clear text */
             .phone-left { width: 140px; transform: translateX(-45%) translateY(20px) rotate(-6deg); animation: none; }
             .phone-right { width: 140px; transform: translateX(45%) translateY(20px) rotate(6deg); animation: none; }
             
@@ -496,11 +513,9 @@
             .feature-item-pale { padding: 12px 20px; font-size: 0.9rem; }
             .premium-footer { padding: 40px 15px; }
             
-            /* Designed by position centered fixed */
             .creator-badge p { font-size: 1.05rem; text-align: center; line-height: 1.6; padding-bottom: 5px; }
             .modal-content { padding: 30px 20px; }
             
-            /* Slight physical press effect alongside JS ripple */
             .btn-apk-download:active, .insta-btn:active, .btn-github-hero:active { transform: scale(0.97) !important; }
         }
 
@@ -529,7 +544,6 @@
                 
                 <div class="hero-buttons-row">
                     <a href="https://github.com/afakeprince/Melodika/releases/download/v1.0.0/melodika_v1.0.0.apk" class="btn-apk-download">Download v1.0.0 APK</a>
-                    
                     <a href="https://github.com/afakeprince/Melodika" target="_blank" class="btn-github-hero">
                         <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
                     </a>
@@ -555,7 +569,6 @@
             <div class="section-content">
                 <h2 class="section-label">Intelligent Library</h2>
                 <p class="section-desc">Experience a sleek user interface that adapts to your environment. Choose from elegant Pitch Black for AMOLED screens or pristine Light theme for daytime clarity.</p>
-                
                 <div class="split-phone-view">
                     <img src="phone_mockup_dark_list.png" alt="Dark Interface" class="sleek-phone">
                     <img src="phone_mockup_light_list.png" alt="Light Interface" class="sleek-phone">
@@ -567,28 +580,14 @@
             <div class="section-content">
                 <h2 class="section-label">Immersive Adaptive Player</h2>
                 <p class="section-desc">Get lost in the music with our unique player. Sync lyrics seamlessly and experience the most responsive, Zero Lag UI of any music player.</p>
-                
                 <div class="immersive-player-mockup">
                     <img src="phone_mockup_player_v2.png" alt="Adaptive Player">
                 </div>
-
                 <div class="feature-points-horizontal">
-                    <div class="feature-item-pale">
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                        Pitch Black Theme
-                    </div>
-                    <div class="feature-item-pale">
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-                        Folder-wise Play
-                    </div>
-                    <div class="feature-item-pale">
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
-                        Sync Lyrics
-                    </div>
-                    <div class="feature-item-pale">
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                        Zero Lag UI
-                    </div>
+                    <div class="feature-item-pale"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> Pitch Black Theme</div>
+                    <div class="feature-item-pale"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> Folder-wise Play</div>
+                    <div class="feature-item-pale"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg> Sync Lyrics</div>
+                    <div class="feature-item-pale"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg> Zero Lag UI</div>
                 </div>
             </div>
         </section>
@@ -602,13 +601,11 @@
             
             <div class="creator-badge">
                 <p>Designed & Developed with ❤️ by <span>Prince Verma</span></p>
-                
                 <div class="social-buttons-row">
                     <a onclick="openModal('supportModal')" class="action-btn support-btn">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                         Support Project
                     </a>
-                    
                     <a href="https://www.instagram.com/afakeprince" target="_blank" class="action-btn insta-btn">
                         <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.20 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
                         @afakeprince
@@ -625,13 +622,29 @@
             <h3 class="modal-title">Support Melodika</h3>
             <p class="modal-desc">"Three months ago, I didn't know a single line of code. Today, Melodika is a reality. Your support keeps an independent developer's ad-free dream alive."</p>
             
-            <div class="support-tiers">
-                <a href="upi://pay?pa=knverma0408-1@okaxis&pn=Prince%20Verma&cu=INR&am=89" class="tier-btn action-btn">☕ Buy me a Coffee <span>₹89</span></a>
-                <a href="upi://pay?pa=knverma0408-1@okaxis&pn=Prince%20Verma&cu=INR&am=149" class="tier-btn action-btn">🍱 Buy me a Meal <span>₹149</span></a>
-                <a href="upi://pay?pa=knverma0408-1@okaxis&pn=Prince%20Verma&cu=INR&am=249" class="tier-btn action-btn">🎬 Buy me a Movie <span>₹249</span></a>
+            <div id="support-tiers-container">
+                <div class="support-tiers">
+                    <a href="#" onclick="processDonation(event, 89); return false;" class="tier-btn action-btn">☕ Buy me a Coffee <span>₹89</span></a>
+                    <a href="#" onclick="processDonation(event, 149); return false;" class="tier-btn action-btn">🍱 Buy me a Meal <span>₹149</span></a>
+                    <a href="#" onclick="processDonation(event, 249); return false;" class="tier-btn action-btn">🎬 Buy me a Movie <span>₹249</span></a>
+                </div>
+                <p class="upi-hint">Supports GPay, PhonePe, Paytm, and more securely.</p>
             </div>
-            
-            <p class="upi-hint">On mobile, buttons will open your UPI app directly.<br>On Desktop, scan or send to UPI ID: <span class="upi-id-text">knverma0408-1@okaxis</span></p>
+
+            <div id="qr-display-container">
+                <h4 class="qr-amount-text" id="qr-amount-text">₹0</h4>
+                <p class="qr-scan-text">Scan with any UPI app to support</p>
+                
+                <div class="qr-wrapper">
+                    <img id="dynamic-qr-img" src="" alt="Payment QR Code">
+                    <div class="qr-center-logo">
+                        <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+                    </div>
+                </div>
+                
+                <button class="btn-back-tiers" onclick="showTiers()">← Back to options</button>
+            </div>
+
         </div>
     </div>
 
@@ -723,16 +736,14 @@
 
         // 2. Mobile-only Wavey Ripple Effect Logic
         function createRipple(event) {
-            if (window.innerWidth > 768) return; // Only apply on mobile screens
+            if (window.innerWidth > 768) return; 
             
             const button = event.currentTarget;
             const circle = document.createElement("span");
             const diameter = Math.max(button.clientWidth, button.clientHeight);
             const radius = diameter / 2;
-            
             const rect = button.getBoundingClientRect();
             
-            // Handle touch or mouse coordinates
             const clientX = event.touches ? event.touches[0].clientX : event.clientX;
             const clientY = event.touches ? event.touches[0].clientY : event.clientY;
 
@@ -741,31 +752,67 @@
             circle.style.top = `${clientY - rect.top - radius}px`;
             circle.classList.add("ripple-effect");
 
-            // Remove any existing ripples
             const existing = button.querySelector('.ripple-effect');
             if(existing) { existing.remove(); }
 
             button.appendChild(circle);
-            
-            // Clean up the span after animation completes
             setTimeout(() => { circle.remove(); }, 600);
         }
 
-        // Attach ripple to buttons
         const buttons = document.querySelectorAll('.btn-apk-download, .btn-github-hero, .action-btn');
         buttons.forEach(btn => {
             btn.addEventListener('mousedown', createRipple);
             btn.addEventListener('touchstart', createRipple, {passive: true});
         });
 
-        // 3. Modals Logic (Open/Close)
-        function openModal(modalId) { document.getElementById(modalId).classList.add('active'); }
-        function closeModal(modalId) { document.getElementById(modalId).classList.remove('active'); }
+        // 3. Modals & Smart QR Logic
+        function openModal(modalId) { 
+            document.getElementById(modalId).classList.add('active'); 
+        }
         
-        // Close modal when clicking outside the content box
+        function closeModal(modalId) { 
+            document.getElementById(modalId).classList.remove('active'); 
+            // Reset support modal back to tiers if closed
+            if(modalId === 'supportModal') {
+                setTimeout(showTiers, 300);
+            }
+        }
+        
         window.onclick = function(event) {
             if (event.target.classList.contains('glass-modal')) {
                 event.target.classList.remove('active');
+                if(event.target.id === 'supportModal') { setTimeout(showTiers, 300); }
+            }
+        }
+
+        function showTiers() {
+            document.getElementById('qr-display-container').style.display = 'none';
+            document.getElementById('support-tiers-container').style.display = 'flex';
+        }
+
+        function processDonation(event, amount) {
+            // THE SECURE UPI ID
+            const myUpiId = "knverma0408-1@okaxis";
+            const myName = "Prince Verma";
+            const upiLink = `upi://pay?pa=${myUpiId}&pn=${encodeURIComponent(myName)}&cu=INR&am=${amount}`;
+
+            if (window.innerWidth <= 768) {
+                // Device is Mobile -> Open GPay/PhonePe directly
+                window.location.href = upiLink;
+            } else {
+                // Device is Desktop -> Show Branded QR Code
+                event.preventDefault();
+                
+                // Set amounts
+                document.getElementById('qr-amount-text').innerText = `₹${amount}`;
+                
+                // Generate QR Code via API with Error Correction (ecc=Q) to allow center logo
+                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&ecc=Q&data=${encodeURIComponent(upiLink)}`;
+                document.getElementById('dynamic-qr-img').src = qrUrl;
+                
+                // Switch UI smoothly
+                document.getElementById('support-tiers-container').style.display = 'none';
+                document.getElementById('qr-display-container').style.display = 'flex';
             }
         }
 
@@ -788,8 +835,6 @@
                 document.getElementById('dl-count').innerText = "Downloads Unavailable"; 
             }
         }
-        
-        // Fetch downloads when page loads
         fetchDownloads();
     </script>
 </body>
