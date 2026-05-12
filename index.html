@@ -96,6 +96,7 @@
             transition: opacity 1.2s cubic-bezier(0.165, 0.84, 0.44, 1), transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
             max-width: 1300px;
             margin: 0 auto;
+            position: relative;
         }
 
         section.visible { opacity: 1; transform: translateY(0); }
@@ -108,12 +109,47 @@
             will-change: transform;
         }
 
+        /* TOP UPDATE BANNER */
+        .top-update-banner {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            z-index: 10;
+            animation: fadeInDown 1s ease-out forwards;
+        }
+        .top-update-banner span {
+            background: #000;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translate(-50%, -20px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+
         /* --- Section 1: Hero View --- */
         #gallery {
             display: flex;
             gap: 50px;
             flex-wrap: nowrap;
             align-items: center;
+            padding-top: 120px;
         }
 
         .hero-text-block {
@@ -145,7 +181,7 @@
             margin-bottom: 40px;
         }
 
-        /* The Original Download Button Setup + GitHub Next to it */
+        /* Buttons Row */
         .hero-buttons-row {
             display: flex;
             gap: 15px;
@@ -161,7 +197,7 @@
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(20px);
             color: #000;
-            padding: 18px 45px;
+            padding: 18px 40px;
             border-radius: 100px;
             text-decoration: none;
             font-weight: 600;
@@ -171,36 +207,52 @@
             position: relative;
             overflow: hidden;
         }
-
         .btn-apk-download:hover { 
             transform: translateY(-5px) scale(1.02); 
             box-shadow: 0 20px 40px rgba(255,255,255,0.4), inset 0 0 0 1px rgba(255,255,255,0.8); 
         }
 
-        .btn-apk-download:active {
-            transform: scale(0.95) !important;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2) !important;
+        /* BLINKING WHATS NEW BUTTON */
+        .btn-whats-new {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 18px 25px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(118, 75, 162, 0.3);
+            animation: pulseGlow 2s infinite;
+        }
+        .btn-whats-new svg { width: 20px; height: 20px; fill: currentColor; }
+        .btn-whats-new:hover { transform: translateY(-3px); animation: none; box-shadow: 0 15px 35px rgba(118, 75, 162, 0.5); }
+        
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(118, 75, 162, 0.6); }
+            70% { box-shadow: 0 0 0 15px rgba(118, 75, 162, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(118, 75, 162, 0); }
         }
 
-        /* New GitHub Button next to Download */
         .btn-github-hero {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             background: linear-gradient(45deg, #333 0%, #111 100%);
             color: #fff;
-            padding: 18px 25px; 
+            padding: 18px 20px; 
             border-radius: 100px;
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
         }
-        
         .btn-github-hero svg { width: 24px; height: 24px; fill: currentColor; }
-        .btn-github-hero:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-        .btn-github-hero:active { transform: scale(0.95) !important; box-shadow: 0 5px 15px rgba(0,0,0,0.2) !important; }
+        .btn-github-hero:hover { transform: translateY(-5px) scale(1.05); }
 
         /* LIVE DOWNLOAD COUNTER BADGE */
         .download-badge {
@@ -249,7 +301,6 @@
             transform: translateX(-55%) rotate(-8deg);
             z-index: 2;
             animation: floatSideLeft 9s ease-in-out infinite;
-            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.3)) brightness(0.95);
         }
 
         .phone-right {
@@ -257,7 +308,6 @@
             transform: translateX(55%) rotate(8deg);
             z-index: 2;
             animation: floatSideRight 10s ease-in-out infinite;
-            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.3)) brightness(0.95);
         }
 
         @keyframes floatSideLeft { 0%, 100% { transform: translateX(-55%) translateY(0) rotate(-8deg); } 50% { transform: translateX(-55%) translateY(-15px) rotate(-10deg); } }
@@ -265,232 +315,77 @@
 
         /* --- Features Sections --- */
         .section-content { display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%; }
-        
-        .section-label {
-            font-size: 0.95rem; font-weight: 700; text-transform: uppercase;
-            letter-spacing: 3px; margin-bottom: 15px; color: var(--main-text); opacity: 0.8;
-        }
-
+        .section-label { font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px; color: var(--main-text); opacity: 0.8; }
         .section-desc { font-size: 1.2rem; color: var(--sub-text); max-width: 650px; margin-bottom: 60px; line-height: 1.6; }
 
-        /* Split Phones Setup */
-        .split-phone-view {
-            display: flex; gap: 50px; justify-content: center; width: 100%; perspective: 1000px;
-        }
+        .split-phone-view { display: flex; gap: 50px; justify-content: center; width: 100%; perspective: 1000px; }
+        .sleek-phone { width: clamp(220px, 30vw, 320px); filter: drop-shadow(0 40px 50px rgba(0,0,0,0.35)); transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .sleek-phone:hover { transform: translateY(-15px) scale(1.03) rotateX(5deg); }
 
-        .sleek-phone {
-            width: clamp(220px, 30vw, 320px);
-            filter: drop-shadow(0 40px 50px rgba(0,0,0,0.35));
-            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-            transform: translateZ(0);
-        }
-
-        .sleek-phone:hover { transform: translateY(-15px) scale(1.03) rotateX(5deg); filter: drop-shadow(0 50px 60px rgba(0,0,0,0.5)); }
-
-        /* Adaptive Player Display */
-        .immersive-player-mockup {
-            width: clamp(250px, 40vw, 350px);
-            filter: drop-shadow(0 45px 60px rgba(0,0,0,0.45));
-            margin-bottom: 60px;
-            transition: transform 0.6s ease;
-        }
+        .immersive-player-mockup { width: clamp(250px, 40vw, 350px); filter: drop-shadow(0 45px 60px rgba(0,0,0,0.45)); margin-bottom: 60px; transition: transform 0.6s ease; }
         .immersive-player-mockup:hover { transform: scale(1.02) translateY(-10px); }
         .immersive-player-mockup img { width: 100%; display: block; }
 
-        /* Custom Premium SVG Features */
         .feature-points-horizontal { display: flex; gap: 20px; max-width: 800px; flex-wrap: wrap; justify-content: center; }
-
-        .feature-item-pale {
-            display: flex; align-items: center; gap: 10px;
-            background: var(--glass-bg); backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border); padding: 14px 28px;
-            border-radius: 100px; font-size: 1rem; font-weight: 600;
-            color: var(--main-text); transition: all 0.4s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05); cursor: default;
-        }
-
+        .feature-item-pale { display: flex; align-items: center; gap: 10px; background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); padding: 14px 28px; border-radius: 100px; font-size: 1rem; font-weight: 600; color: var(--main-text); transition: all 0.4s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         .feature-item-pale svg { width: 22px; height: 22px; stroke: #000; }
-        .feature-item-pale:hover {
-            background: rgba(255, 255, 255, 0.3); transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-        }
+        .feature-item-pale:hover { background: rgba(255, 255, 255, 0.3); transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
 
-        /* --- Beautiful Premium Footer --- */
-        .premium-footer {
-            width: 100%;
-            padding: 50px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 25px;
-            margin-top: 40px;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .footer-links a {
-            color: var(--main-text);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 600;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
-            cursor: pointer;
-        }
-
+        /* --- Premium Footer --- */
+        .premium-footer { width: 100%; padding: 50px 20px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border-top: 1px solid rgba(255, 255, 255, 0.2); display: flex; flex-direction: column; align-items: center; gap: 25px; margin-top: 40px; }
+        .footer-links { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; justify-content: center; }
+        .footer-links a { color: var(--main-text); text-decoration: none; font-size: 0.95rem; font-weight: 600; opacity: 0.7; cursor: pointer; transition: opacity 0.3s ease; }
         .footer-links a:hover { opacity: 1; }
-        .footer-links .divider { opacity: 0.4; }
-
-        .creator-badge {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            width: 100%;
-            gap: 15px;
-        }
-
-        .creator-badge p {
-            font-size: 1.1rem;
-            color: var(--main-text);
-            opacity: 0.8;
-            font-weight: 500;
-            margin-bottom: 5px;
-        }
-
+        .creator-badge { display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%; gap: 15px; }
+        .creator-badge p { font-size: 1.1rem; color: var(--main-text); opacity: 0.8; font-weight: 500; margin-bottom: 5px; }
         .creator-badge span { font-weight: 800; }
-
-        /* Social Buttons Row */
-        .social-buttons-row { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
-
-        .action-btn {
-            display: flex; align-items: center; gap: 8px; color: #fff;
-            padding: 10px 20px; border-radius: 100px; text-decoration: none;
-            font-weight: 600; font-size: 0.9rem; transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative; overflow: hidden; cursor: pointer; border: none; outline: none; font-family: inherit;
-        }
-
-        .insta-btn { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); box-shadow: 0 4px 15px rgba(220, 39, 67, 0.3); }
-        .insta-btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 20px rgba(220, 39, 67, 0.5); }
         
-        .support-btn { background: linear-gradient(45deg, #FF512F 0%, #F09819 100%); box-shadow: 0 4px 15px rgba(240, 152, 25, 0.3); }
+        .social-buttons-row { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .action-btn { display: flex; align-items: center; gap: 8px; color: #fff; padding: 10px 20px; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; border: none; }
+        .insta-btn { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .insta-btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 20px rgba(220, 39, 67, 0.5); }
+        .support-btn { background: linear-gradient(45deg, #FF512F 0%, #F09819 100%); }
         .support-btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 20px rgba(240, 152, 25, 0.5); }
 
-        .action-btn svg { width: 18px; height: 18px; fill: currentColor; }
-        .action-btn:active { transform: scale(0.95) !important; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4) !important; }
-
-        /* --- GLASSMORPHISM MODALS (Support & Legal) --- */
-        .glass-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            z-index: 9999; display: flex; justify-content: center; align-items: center;
-            opacity: 0; pointer-events: none; transition: all 0.4s ease;
-        }
-
+        /* --- GLASSMORPHISM MODALS --- */
+        .glass-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 9999; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: all 0.4s ease; }
         .glass-modal.active { opacity: 1; pointer-events: auto; }
-
-        .modal-content {
-            background: rgba(255, 255, 255, 0.85); border-radius: 28px;
-            padding: 40px; max-width: 500px; width: 90%;
-            transform: translateY(40px); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            max-height: 85vh; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            position: relative; border: 1px solid rgba(255,255,255,0.5);
-            display: flex; flex-direction: column; overflow: hidden;
-        }
-
+        .modal-content { background: rgba(255, 255, 255, 0.85); border-radius: 28px; padding: 40px; max-width: 500px; width: 90%; transform: translateY(40px); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); max-height: 85vh; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.2); position: relative; border: 1px solid rgba(255,255,255,0.5); display: flex; flex-direction: column; overflow: hidden; }
         .glass-modal.active .modal-content { transform: translateY(0); }
-
-        .close-modal {
-            position: absolute; top: 15px; right: 20px; font-size: 28px;
-            color: rgba(0,0,0,0.5); cursor: pointer; line-height: 1; transition: color 0.3s ease; z-index: 10;
-        }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 28px; color: rgba(0,0,0,0.5); cursor: pointer; line-height: 1; transition: color 0.3s ease; z-index: 10; }
         .close-modal:hover { color: #000; }
-
         .modal-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 15px; letter-spacing: -1px; }
-        .modal-desc { font-size: 1rem; color: var(--sub-text); line-height: 1.6; margin-bottom: 30px; font-style: italic; }
+        .modal-desc { font-size: 1rem; color: var(--sub-text); line-height: 1.6; margin-bottom: 20px; font-style: italic; }
         
-        .modal-scroll-area {
-            overflow-y: auto; text-align: left; padding-right: 10px; font-size: 0.95rem; color: rgba(0,0,0,0.8); line-height: 1.6; font-style: normal;
-        }
+        .modal-scroll-area { overflow-y: auto; text-align: left; padding-right: 15px; font-size: 0.95rem; color: rgba(0,0,0,0.8); line-height: 1.6; font-style: normal; }
         .modal-scroll-area::-webkit-scrollbar { width: 6px; }
         .modal-scroll-area::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 10px; }
+
+        /* Whats New List Formatting */
+        .whats-new-list h4 { font-size: 1.1rem; font-weight: 700; color: #000; margin-top: 15px; margin-bottom: 8px; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 5px;}
+        .whats-new-list ul { list-style: none; margin-left: 0; padding-left: 0; }
+        .whats-new-list li { position: relative; padding-left: 20px; margin-bottom: 8px; }
+        .whats-new-list li::before { content: "✦"; position: absolute; left: 0; color: #764ba2; font-size: 0.9rem; }
+        .whats-new-list strong { color: #2d3748; }
 
         /* Support Tiers Container */
         #support-tiers-container { display: flex; flex-direction: column; transition: opacity 0.3s ease; }
         .support-tiers { display: flex; flex-direction: column; gap: 15px; }
-
-        .tier-btn {
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(255, 255, 255, 0.9); padding: 18px 25px;
-            border-radius: 18px; text-decoration: none; color: #000;
-            font-weight: 700; font-size: 1.1rem; border: 1px solid rgba(0,0,0,0.1);
-            transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            position: relative; overflow: hidden;
-        }
-        
+        .tier-btn { display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.9); padding: 18px 25px; border-radius: 18px; text-decoration: none; color: #000; font-weight: 700; font-size: 1.1rem; border: 1px solid rgba(0,0,0,0.1); transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .tier-btn span { opacity: 0.6; font-weight: 500; pointer-events: none; }
-        .tier-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-color: rgba(0,0,0,0.2); }
-        .tier-btn:active { transform: scale(0.97); }
-        
-        .upi-hint { margin-top: 20px; font-size: 0.8rem; color: rgba(0,0,0,0.5); line-height: 1.4; }
-
-        /* BRANDED QR DISPLAY CONTAINER */
-        #qr-display-container {
-            display: none; flex-direction: column; align-items: center;
-            animation: fadeIn 0.4s ease forwards;
-        }
-        
-        .qr-wrapper {
-            position: relative; background: #fff; padding: 15px;
-            border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            display: inline-block; margin-bottom: 20px;
-        }
-
+        .tier-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .upi-hint { margin-top: 20px; font-size: 0.8rem; color: rgba(0,0,0,0.5); }
+        #qr-display-container { display: none; flex-direction: column; align-items: center; animation: fadeIn 0.4s ease forwards; }
+        .qr-wrapper { position: relative; background: #fff; padding: 15px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: inline-block; margin-bottom: 20px; }
         .qr-wrapper img { display: block; width: 200px; height: 200px; border-radius: 10px; }
-        
-        /* The custom Melodika Logo in the center of the QR code */
-        .qr-center-logo {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 45px; height: 45px; background: var(--bg-gradient);
-            border-radius: 12px; border: 3px solid #fff;
-            display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2); color: #fff;
-        }
-
-        .qr-center-logo svg { width: 22px; height: 22px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-
+        .qr-center-logo { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 45px; height: 45px; background: var(--bg-gradient); border-radius: 12px; border: 3px solid #fff; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); color: #fff; }
+        .qr-center-logo svg { width: 22px; height: 22px; stroke: currentColor; stroke-width: 2; fill: none; }
         .qr-amount-text { font-size: 1.5rem; font-weight: 800; color: #000; margin-bottom: 5px; }
         .qr-scan-text { font-size: 0.95rem; color: var(--sub-text); margin-bottom: 20px; }
+        .btn-back-tiers { background: rgba(0,0,0,0.05); color: #000; border: none; padding: 10px 25px; border-radius: 100px; font-weight: 600; cursor: pointer; }
 
-        .btn-back-tiers {
-            background: rgba(0,0,0,0.05); color: #000; border: none;
-            padding: 10px 25px; border-radius: 100px; font-weight: 600;
-            font-size: 0.95rem; cursor: pointer; transition: all 0.3s ease;
-        }
-        .btn-back-tiers:hover { background: rgba(0,0,0,0.1); transform: translateY(-2px); }
-
-        /* Mobile Ripple Effect Animation (CSS Part) */
-        .ripple-effect {
-            position: absolute; border-radius: 50%; transform: scale(0);
-            animation: ripple-animation 0.6s linear; background-color: rgba(255, 255, 255, 0.4); pointer-events: none;
-        }
-        @keyframes ripple-animation { to { transform: scale(4); opacity: 0; } }
-
-        /* ========================================= */
-        /* 📱 RESPONSIVE DESIGN (TABLET & MOBILE) 📱 */
-        /* ========================================= */
         @media (max-width: 900px) {
-            #gallery { flex-direction: column; text-align: center; padding-top: 120px; }
+            #gallery { flex-direction: column; text-align: center; padding-top: 140px; }
             .hero-text-block { max-width: 100%; align-items: center; display: flex; flex-direction: column; }
             .hero-buttons-row { justify-content: center; } 
             .main-heading { font-size: 3.5rem; }
@@ -503,20 +398,9 @@
             #gallery { justify-content: flex-start; padding-bottom: 60px; }
             .main-heading { font-size: 2.8rem; }
             .photo-gallery-cluster { height: 380px; margin-top: 60px; }
-            
-            .phone-left { width: 140px; transform: translateX(-45%) translateY(20px) rotate(-6deg); animation: none; }
-            .phone-right { width: 140px; transform: translateX(45%) translateY(20px) rotate(6deg); animation: none; }
-            
             .split-phone-view { flex-direction: column; align-items: center; gap: 40px; }
             .sleek-phone { width: 80%; max-width: 280px; }
-            .feature-points-horizontal { gap: 12px; }
-            .feature-item-pale { padding: 12px 20px; font-size: 0.9rem; }
-            .premium-footer { padding: 40px 15px; }
-            
-            .creator-badge p { font-size: 1.05rem; text-align: center; line-height: 1.6; padding-bottom: 5px; }
-            .modal-content { padding: 30px 20px; }
-            
-            .btn-apk-download:active, .insta-btn:active, .btn-github-hero:active { transform: scale(0.97) !important; }
+            .btn-whats-new { width: 100%; }
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -536,6 +420,10 @@
     </div>
 
     <main>
+        <div class="top-update-banner">
+            <span>NEW</span> Melodika v2.0.0 is officially live!
+        </div>
+
         <section id="gallery">
             <div class="hero-text-block">
                 <h1 class="main-heading">MELODIKA</h1>
@@ -543,7 +431,13 @@
                 <p class="main-body-copy">Your entire music library, curated and elevated with an intelligent, intuitive experience.</p>
                 
                 <div class="hero-buttons-row">
-                    <a href="https://github.com/afakeprince/Melodika/releases/download/v1.0.0/melodika_v1.0.0.apk" class="btn-apk-download">Download v1.0.0 APK</a>
+                    <a href="https://github.com/afakeprince/Melodika/releases/latest" class="btn-apk-download">Download v2.0.0 APK</a>
+                    
+                    <a onclick="openModal('whatsNewModal')" class="btn-whats-new">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        What's New in v2.0
+                    </a>
+
                     <a href="https://github.com/afakeprince/Melodika" target="_blank" class="btn-github-hero">
                         <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
                     </a>
@@ -613,8 +507,45 @@
                 </div>
             </div>
         </footer>
-
     </main>
+
+    <div class="glass-modal" id="whatsNewModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('whatsNewModal')">&times;</span>
+            <h3 class="modal-title">What's New in v2.0 🎵</h3>
+            <p class="modal-desc">A New Era for Offline Music Players. Melodika introduces one of the most advanced offline lyric systems ever built.</p>
+            
+            <div class="modal-scroll-area whats-new-list" style="height: 380px;">
+                
+                <h4>✨ Major Features</h4>
+                <ul>
+                    <li><strong>Intelligent Lyrics Hub:</strong> A completely redesigned screen for seamless lyric and queue navigation.</li>
+                    <li><strong>Phonetic Pronunciation Support:</strong> Sing along effortlessly with Hinglish/Romanized guides.</li>
+                    <li><strong>Smart Artwork Engine:</strong> Automatically fetches and embeds missing high-definition album art directly in Settings.</li>
+                    <li><strong>On-Demand Lyrics Fetcher:</strong> Automatically retrieves and embeds missing lyrics into your tracks for permanent offline access.</li>
+                    <li><strong>The Lyric Lab Engine:</strong> Our proprietary engine now flawlessly supports Simple, Line-by-Line, and ultra-precise Word-by-Word synchronization.</li>
+                    <li><strong>Karaoke Mode:</strong> Immerse yourself with word-synced lyrics that glow flawlessly in real-time.</li>
+                    <li><strong>Refined Playback Controls:</strong> A smarter, decluttered layout designed for effortless navigation.</li>
+                    <li><strong>Aesthetic Color Palette:</strong> Handpicked hues for a calming, luxurious visual experience.</li>
+                    <li><strong>Adaptive Lyric Layouts:</strong> Custom-tailored premium views for all three lyric formats.</li>
+                    <li><strong>Custom Playlist Iconography:</strong> Distinct visual identities for your curated collections.</li>
+                    <li><strong>Redesigned Splash Experience:</strong> A beautiful, welcoming launch screen.</li>
+                    <li><strong>Extended Tag Editor:</strong> Now fully supports metadata editing for M4A audio formats!</li>
+                </ul>
+
+                <h4>🚀 Improvements & Optimizations</h4>
+                <ul>
+                    <li><strong>Visual Consistency:</strong> Resolved artwork scaling issues across Queue and Lyric views.</li>
+                    <li><strong>Lightning Fast Launch:</strong> Significantly reduced startup times.</li>
+                    <li><strong>Seamless Onboarding:</strong> Eliminated blank screens during initial launch and first-time installations.</li>
+                    <li><strong>Precision Playback:</strong> Corrected seek bar and timing overlaps for flawless scrubbing.</li>
+                    <li><strong>Optimized Battery Usage:</strong> Enjoy your music longer with under-the-hood power efficiency improvements.</li>
+                    <li><strong>Enhanced Stability:</strong> Addressed unexpected closures for uninterrupted, stable listening.</li>
+                </ul>
+                <br><br>
+            </div>
+        </div>
+    </div>
 
     <div class="glass-modal" id="supportModal">
         <div class="modal-content">
@@ -634,17 +565,14 @@
             <div id="qr-display-container">
                 <h4 class="qr-amount-text" id="qr-amount-text">₹0</h4>
                 <p class="qr-scan-text">Scan with any UPI app to support</p>
-                
                 <div class="qr-wrapper">
                     <img id="dynamic-qr-img" src="" alt="Payment QR Code">
                     <div class="qr-center-logo">
                         <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
                     </div>
                 </div>
-                
                 <button class="btn-back-tiers" onclick="showTiers()">← Back to options</button>
             </div>
-
         </div>
     </div>
 
@@ -654,38 +582,27 @@
             <h3 class="modal-title">Terms & Conditions</h3>
             <div class="modal-scroll-area" style="height: 300px;">
                 <p><i>Last updated: 09/04/2026</i></p><br>
-                <p><b>Welcome to Melodika.</b> These Terms and Conditions ("Terms") govern your use of the Melodika mobile application ("App"), developed and maintained by Prince Verma ("Developer", "we", "us", or "our").</p>
-                <br>
-                <p>By downloading, installing, or using Melodika, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use the App.</p>
-                <br>
-                <p><b>1. Nature of the Service</b><br>Melodika is an offline, local audio playback application. The App is designed to read, organize, and play audio files that are already stored locally on your device's internal or external storage.</p>
-                <br>
+                <p><b>Welcome to Melodika.</b> These Terms and Conditions ("Terms") govern your use of the Melodika mobile application ("App"), developed and maintained by Prince Verma ("Developer", "we", "us", or "our").</p><br>
+                <p>By downloading, installing, or using Melodika, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use the App.</p><br>
+                <p><b>1. Nature of the Service</b><br>Melodika is an offline, local audio playback application. The App is designed to read, organize, and play audio files that are already stored locally on your device's internal or external storage.</p><br>
                 <p><b>2. Copyright and Content Disclaimer</b></p>
                 <ul style="margin-left: 20px; margin-top: 5px;">
                     <li style="margin-bottom: 5px;"><b>No Content Provided:</b> Melodika does not host, distribute, stream, download, or provide any music, audio files, or copyrighted material.</li>
                     <li style="margin-bottom: 5px;"><b>User Responsibility:</b> You are solely responsible for the audio files you play using the App. You represent and warrant that you have the legal right to possess and play the audio files stored on your device.</li>
                     <li><b>No Liability:</b> The Developer shall not be held liable for any copyright infringement or legal issues arising from the user's personal audio collection.</li>
-                </ul>
-                <br>
-                <p><b>3. Privacy and Data Security</b><br>Your privacy is important to us. Melodika operates entirely offline. We do not collect, harvest, transmit, or sell your personal data, audio files, or usage habits to external servers. For more details, please read our Privacy Policy.</p>
-                <br>
-                <p><b>4. Intellectual Property Rights</b><br>The App itself, including its original code, user interface, design, algorithms, and branding (excluding your personal audio files and associated metadata/album art), are the exclusive property of Prince Verma and are protected by copyright and intellectual property laws. You may not reverse-engineer, decompile, copy, or distribute the App's source code without explicit written permission.</p>
-                <br>
+                </ul><br>
+                <p><b>3. Privacy and Data Security</b><br>Your privacy is important to us. Melodika operates entirely offline. We do not collect, harvest, transmit, or sell your personal data, audio files, or usage habits to external servers. For more details, please read our Privacy Policy.</p><br>
+                <p><b>4. Intellectual Property Rights</b><br>The App itself, including its original code, user interface, design, algorithms, and branding (excluding your personal audio files and associated metadata/album art), are the exclusive property of Prince Verma and are protected by copyright and intellectual property laws. You may not reverse-engineer, decompile, copy, or distribute the App's source code without explicit written permission.</p><br>
                 <p><b>5. Prohibited Activities</b><br>While using Melodika, you agree NOT to:</p>
                 <ul style="margin-left: 20px; margin-top: 5px;">
                     <li style="margin-bottom: 5px;">Use the App for any illegal or unauthorized purpose.</li>
                     <li style="margin-bottom: 5px;">Interfere with or disrupt the security, integrity, or performance of the App.</li>
                     <li>Attempt to inject malware, viruses, or malicious code into the App.</li>
-                </ul>
-                <br>
-                <p><b>6. Disclaimer of Warranties</b><br>The App is provided on an "AS IS" and "AS AVAILABLE" basis. The Developer makes no warranties, expressed or implied, regarding the App's reliability, accuracy, or compatibility with your specific device. We do not guarantee that the App will be entirely error-free, uninterrupted, or that any defects will be immediately corrected.</p>
-                <br>
-                <p><b>7. Limitation of Liability</b><br>In no event shall the Developer be liable for any direct, indirect, incidental, consequential, or special damages arising out of or in connection with your use or inability to use the App, including but not limited to data loss, audio file corruption during tag editing, device malfunction, or hearing damage due to excessive volume levels.</p>
-                <br>
-                <p><b>8. Changes to These Terms</b><br>We reserve the right to modify or replace these Terms at any time. If a revision is material, we will make reasonable efforts to provide notice within the App. By continuing to access or use our App after those revisions become effective, you agree to be bound by the revised terms.</p>
-                <br>
-                <p><b>9. Contact Information</b><br>If you have any questions, concerns, or feedback regarding these Terms, please contact us at: <b>Email: knverma0408@gmail.com</b></p>
-                <br><br>
+                </ul><br>
+                <p><b>6. Disclaimer of Warranties</b><br>The App is provided on an "AS IS" and "AS AVAILABLE" basis. The Developer makes no warranties, expressed or implied, regarding the App's reliability, accuracy, or compatibility with your specific device. We do not guarantee that the App will be entirely error-free, uninterrupted, or that any defects will be immediately corrected.</p><br>
+                <p><b>7. Limitation of Liability</b><br>In no event shall the Developer be liable for any direct, indirect, incidental, consequential, or special damages arising out of or in connection with your use or inability to use the App, including but not limited to data loss, audio file corruption during tag editing, device malfunction, or hearing damage due to excessive volume levels.</p><br>
+                <p><b>8. Changes to These Terms</b><br>We reserve the right to modify or replace these Terms at any time. If a revision is material, we will make reasonable efforts to provide notice within the App. By continuing to access or use our App after those revisions become effective, you agree to be bound by the revised terms.</p><br>
+                <p><b>9. Contact Information</b><br>If you have any questions, concerns, or feedback regarding these Terms, please contact us at: <b>Email: hello@melodika.co.in</b></p><br><br>
             </div>
         </div>
     </div>
@@ -695,26 +612,18 @@
             <span class="close-modal" onclick="closeModal('privacyModal')">&times;</span>
             <h3 class="modal-title">Privacy Policy</h3>
             <div class="modal-scroll-area" style="height: 300px;">
-                <p>Prince Verma built the Melodika app as a Free app. This SERVICE is provided by Prince Verma at no cost and is intended for use as is.</p>
-                <br>
-                <p>This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service.</p>
-                <br>
-                <p><b>Information Collection and Use</b><br>Melodika is an offline music player. The app does not collect, store, or share any personal data, location data, or usage statistics with any external servers.</p>
-                <br>
+                <p>Prince Verma built the Melodika app as a Free app. This SERVICE is provided by Prince Verma at no cost and is intended for use as is.</p><br>
+                <p>This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service.</p><br>
+                <p><b>Information Collection and Use</b><br>Melodika is an offline music player. The app does not collect, store, or share any personal data, location data, or usage statistics with any external servers.</p><br>
                 <p><b>Permissions</b><br>To function properly, the app requires the following permissions:</p>
                 <ul style="margin-left: 20px; margin-top: 5px;">
                     <li style="margin-bottom: 5px;"><b>Storage/Media Permission:</b> Required strictly to scan, read, and play the audio files stored locally on your device. We do not modify or delete your files without your explicit action.</li>
                     <li><b>Notifications:</b> Required to display the media playback controls in the background.</li>
-                </ul>
-                <br>
-                <p><b>Third-Party Services</b><br>The app does not use any third-party services that may collect information used to identify you. We do not show ads or use tracking SDKs.</p>
-                <br>
-                <p><b>Security</b><br>I value your trust in providing your local access, thus we are striving to use commercially acceptable means of protecting it. Since no data leaves your device through this app, your data remains 100% safe and local.</p>
-                <br>
-                <p><b>Changes to This Privacy Policy</b><br>I may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. I will notify you of any changes by posting the new Privacy Policy on this page.</p>
-                <br>
-                <p><b>Contact Us</b><br>If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at: <b>knverma0408@gmail.com</b></p>
-                <br><br>
+                </ul><br>
+                <p><b>Third-Party Services</b><br>The app does not use any third-party services that may collect information used to identify you. We do not show ads or use tracking SDKs.</p><br>
+                <p><b>Security</b><br>I value your trust in providing your local access, thus we are striving to use commercially acceptable means of protecting it. Since no data leaves your device through this app, your data remains 100% safe and local.</p><br>
+                <p><b>Changes to This Privacy Policy</b><br>I may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. I will notify you of any changes by posting the new Privacy Policy on this page.</p><br>
+                <p><b>Contact Us</b><br>If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at: <b>hello@melodika.co.in</b></p><br><br>
             </div>
         </div>
     </div>
@@ -759,7 +668,7 @@
             setTimeout(() => { circle.remove(); }, 600);
         }
 
-        const buttons = document.querySelectorAll('.btn-apk-download, .btn-github-hero, .action-btn');
+        const buttons = document.querySelectorAll('.btn-apk-download, .btn-github-hero, .btn-whats-new, .action-btn');
         buttons.forEach(btn => {
             btn.addEventListener('mousedown', createRipple);
             btn.addEventListener('touchstart', createRipple, {passive: true});
@@ -791,26 +700,18 @@
         }
 
         function processDonation(event, amount) {
-            // THE SECURE UPI ID
             const myUpiId = "knverma0408-1@okaxis";
             const myName = "Prince Verma";
             const upiLink = `upi://pay?pa=${myUpiId}&pn=${encodeURIComponent(myName)}&cu=INR&am=${amount}`;
 
             if (window.innerWidth <= 768) {
-                // Device is Mobile -> Open GPay/PhonePe directly
                 window.location.href = upiLink;
             } else {
-                // Device is Desktop -> Show Branded QR Code
                 event.preventDefault();
-                
-                // Set amounts
                 document.getElementById('qr-amount-text').innerText = `₹${amount}`;
-                
-                // Generate QR Code via API with Error Correction (ecc=Q) to allow center logo
                 const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&ecc=Q&data=${encodeURIComponent(upiLink)}`;
                 document.getElementById('dynamic-qr-img').src = qrUrl;
                 
-                // Switch UI smoothly
                 document.getElementById('support-tiers-container').style.display = 'none';
                 document.getElementById('qr-display-container').style.display = 'flex';
             }
