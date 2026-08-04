@@ -94,7 +94,7 @@
     max-width: 480px; margin-bottom: 32px; line-height: 1.6; font-weight: 400;
   }
 
-  /* What's New banner (Top Pill Position) */
+  /* What's New banner (Top Pill Position with Black Dot & New Indicator) */
   .whats-new-banner {
     display: inline-flex; align-items: center; gap: 10px;
     background: var(--card);
@@ -107,10 +107,10 @@
   }
   .whats-new-banner:hover { border-color: var(--ink); box-shadow: 0 6px 18px -6px rgba(10,10,10,0.15); transform: translateY(-1px); }
   .wn-dot {
-    width: 7px; height: 7px; border-radius: 50%; background: #22c55e; flex-shrink: 0;
-    box-shadow: 0 0 0 0 rgba(34,197,94,0.5); animation: pulse-dot 2s infinite;
+    width: 7px; height: 7px; border-radius: 50%; background: #0a0a0a; flex-shrink: 0;
+    box-shadow: 0 0 0 0 rgba(10,10,10,0.4); animation: pulse-dot 2s infinite;
   }
-  @keyframes pulse-dot { 0%{box-shadow:0 0 0 0 rgba(34,197,94,0.5);} 60%{box-shadow:0 0 0 7px rgba(34,197,94,0);} 100%{box-shadow:0 0 0 0 rgba(34,197,94,0);} }
+  @keyframes pulse-dot { 0%{box-shadow:0 0 0 0 rgba(10,10,10,0.4);} 60%{box-shadow:0 0 0 7px rgba(10,10,10,0);} 100%{box-shadow:0 0 0 0 rgba(10,10,10,0);} }
   .wn-label {
     font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--ink);
@@ -267,7 +267,7 @@
     background: #fff; color: var(--ink);
     padding: 14px 24px; border-radius: 14px;
     font-weight: 700; transition: transform .3s var(--ease), box-shadow .3s var(--ease);
-    min-width: 185px; justify-content: flex-start;
+    min-width: 200px; justify-content: flex-start;
   }
   .store-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 36px -10px rgba(255,255,255,0.22); }
   .store-btn svg { width: 26px; height: 26px; flex-shrink: 0; }
@@ -357,7 +357,7 @@
     font-size: 11px; font-weight: 700; letter-spacing: 1px;
     text-transform: uppercase; color: var(--ink-faint); margin-bottom: 14px;
   }
-  .wn-version-pill span { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; }
+  .wn-version-pill span { width: 7px; height: 7px; border-radius: 50%; background: #0a0a0a; }
   .wn-modal-title { font-size: 1.9rem; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 6px; line-height: 1.15; }
   .wn-modal-subtitle { font-size: 14px; color: var(--ink-soft); }
   .wn-modal-body { overflow-y: auto; padding: 28px 36px 32px; display: flex; flex-direction: column; gap: 28px; }
@@ -478,10 +478,10 @@
 <!-- ── HERO ── -->
 <section class="hero">
   <div class="hero-left reveal">
-    <!-- Repositioned What's New Pill Banner -->
+    <!-- What's New Pill Banner with Black Dot & New Release Indicator -->
     <div class="whats-new-banner" onclick="openModal('whatsNewModal')">
       <div class="wn-dot"></div>
-      <span class="wn-label">v2.0.0 Released</span>
+      <span class="wn-label">NEW RELEASE v3.0.0</span>
       <div class="wn-sep"></div>
       <span class="wn-text">See What's New</span>
       <span class="wn-arrow">›</span>
@@ -491,9 +491,9 @@
     <p>Your entire library, beautifully organised and played back with zero compromise. No streaming, no sign-up, no noise.</p>
 
     <div class="hero-actions">
-      <a href="https://github.com/afakeprince/Melodika/releases/download/v2.0.0/melodika_v2.0.0.apk" class="btn-primary">
+      <a href="https://github.com/afakeprince/Melodika/releases/download/v3.0.0/melodika_v3.0.0.apk" class="btn-primary">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v13m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
-        Download v2.0.0 APK
+        Download v3.0.0 APK
       </a>
       <a href="https://github.com/afakeprince/Melodika" target="_blank" class="btn-github">
         <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
@@ -620,7 +620,7 @@
   <div class="stat reveal"><div class="num">0</div><div class="lbl">Ads, ever</div></div>
   <div class="stat reveal"><div class="num">100%</div><div class="lbl">Offline playback</div></div>
   <div class="stat reveal"><div class="num">3</div><div class="lbl">Lyrics modes</div></div>
-  <div class="stat reveal"><div class="num">v2.0.0</div><div class="lbl">Latest release</div></div>
+  <div class="stat reveal"><div class="num">v3.0.0</div><div class="lbl">Latest release</div></div>
 </div>
 
 <!-- ── DOWNLOAD ── -->
@@ -630,23 +630,19 @@
   <p class="reveal">No sign-up, no subscription. Just your music, the way it should sound.</p>
 
   <div class="reveal" style="margin-bottom: 28px;">
-    <a href="https://github.com/afakeprince/Melodika/releases/download/v2.0.0/melodika_v2.0.0.apk" class="btn-apk-dark">
+    <a href="https://github.com/afakeprince/Melodika/releases/download/v3.0.0/melodika_v3.0.0.apk" class="btn-apk-dark">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v13m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
-      Download APK — v2.0.0
+      Download APK — v3.0.0
     </a>
   </div>
 
   <div class="store-buttons reveal">
     <a href="#" class="store-btn">
-      <svg viewBox="0 0 24 24"><path fill="currentColor" d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8.79-.06 1.65-.72 3.02-.8 1.57.06 2.75.63 3.51 1.68-3.09 1.85-2.58 5.94.4 7.09-.61 1.6-1.42 3.2-2.01 4.2M12.03 7.25c-.16-2.07 1.53-3.79 3.5-3.95.24 2.13-1.61 3.98-3.5 3.95"/></svg>
-      <div class="store-text"><small>Coming soon to</small><span>App Store</span></div>
-    </a>
-    <a href="#" class="store-btn">
       <svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 20.5V3.5c0-.3.1-.5.3-.7L13 12l-9.7 9.2c-.2-.2-.3-.4-.3-.7zM16.5 15l-2.6-1.6L13 12l.9-1.4 2.6-1.6 2.4 1.4c.7.4.7 1.4 0 1.8l-2.4 1.4zM4.5 2.7l9.5 5.6-2.4 2.4-7.1-8zM4.5 21.3l7.1-8 2.4 2.4-9.5 5.6z"/></svg>
       <div class="store-text"><small>Coming soon to</small><span>Google Play</span></div>
     </a>
   </div>
-  <div class="download-meta reveal">Version <b>2.0.0</b> · Android 8+ · ~12 MB · <b>Free forever</b></div>
+  <div class="download-meta reveal">Version <b>3.0.0</b> · Android 8+ · ~12 MB · <b>Free forever</b></div>
 </section>
 
 <!-- ── FOOTER ── -->
@@ -684,41 +680,34 @@
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal('whatsNewModal')">×</button>
     <div class="wn-modal-header">
-      <div class="wn-version-pill"><span></span> Version 2.0.0</div>
+      <div class="wn-version-pill"><span></span> Version 3.0.0</div>
       <h2 class="wn-modal-title">What's New<br>in Melodika</h2>
-      <p class="wn-modal-subtitle">The biggest update yet — lyrics, karaoke &amp; more.</p>
+      <p class="wn-modal-subtitle">A major upgrade — refined design, smart folder scans &amp; sleep control.</p>
     </div>
     <div class="wn-modal-body">
       <div>
         <p class="wn-section-title">✦ Major New Features</p>
         <div class="wn-features-list">
-          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#EDE9FE;">🎵</div><div><p class="wn-feature-name">Smart Lyrics &amp; Queue Screen</p><p class="wn-feature-desc">A completely redesigned experience — cleaner, smarter, and faster.</p></div></div>
-          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#DCFCE7;">🗣️</div><div><p class="wn-feature-name">Lyrics Pronunciation Support</p><p class="wn-feature-desc">Understand how to sing along — pronunciation guidance built right in.</p></div></div>
-          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#FEF3C7;">🖼️</div><div><p class="wn-feature-name">Automatic Artwork Finder</p><p class="wn-feature-desc">Finds and sets album art for your songs automatically from Settings.</p></div></div>
-          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#FEE2E2;">🔍</div><div><p class="wn-feature-name">Auto Lyrics Finder</p><p class="wn-feature-desc">Finds and embeds lyrics directly into your MP3 files — fully offline.</p></div></div>
-          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#E0F2FE;">📝</div><div><p class="wn-feature-name">Three Lyrics Modes</p><p class="wn-feature-desc">Simple, line-by-line synced, and word-by-word — all supported natively.</p></div></div>
-          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#F3E8FF;">⚗️</div><div><p class="wn-feature-name">Lyric Lab Engine</p><p class="wn-feature-desc">Generate synced lyrics entirely on-device. No internet required.</p></div></div>
-          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#FFF7ED;">🎤</div><div><p class="wn-feature-name">Karaoke Mode</p><p class="wn-feature-desc">Word-synced lyrics highlight in real time — true karaoke, offline.</p></div></div>
-          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#ECFDF5;">🎛️</div><div><p class="wn-feature-name">Redesigned Player Controls</p><p class="wn-feature-desc">Smarter layout, premium colour palette, calmer overall experience.</p></div></div>
-          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#EFF6FF;">🌅</div><div><p class="wn-feature-name">New Splash Screen</p><p class="wn-feature-desc">A fresh, premium splash screen greets you every time you open the app.</p></div></div>
-          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#FDF2F8;">🎨</div><div><p class="wn-feature-name">Unique Playlist Icons</p><p class="wn-feature-desc">Every playlist has its own distinct icon for quick recognition.</p></div></div>
-          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#FAFAF9;">🏷️</div><div><p class="wn-feature-name">Tag Editor Now Supports M4A</p><p class="wn-feature-desc">Edit metadata for M4A files directly within Melodika.</p></div></div>
+          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#EDE9FE;">✨</div><div><p class="wn-feature-name">Frosted Glass Header</p><p class="wn-feature-desc">A translucent glassmorphic header that smoothly blends with your backdrop as you scroll.</p></div></div>
+          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#DCFCE7;">⚡</div><div><p class="wn-feature-name">Ultra-Smooth UI Motion</p><p class="wn-feature-desc">Re-engineered transitions and buttery smooth UI animations across all screens.</p></div></div>
+          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#FEF3C7;">🎶</div><div><p class="wn-feature-name">New Playlist Modes</p><p class="wn-feature-desc">Dynamic playlist handling and flexible new view modes for your custom collections.</p></div></div>
+          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#FEE2E2;">📁</div><div><p class="wn-feature-name">Scan by Folder Support</p><p class="wn-feature-desc">Select specific folders to scan, giving you direct control over your local library scope.</p></div></div>
+          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#E0F2FE;">➕</div><div><p class="wn-feature-name">New Create Playlist Style</p><p class="wn-feature-desc">A completely redesigned dialog for creating playlists effortlessly in one step.</p></div></div>
+          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#F3E8FF;">🌙</div><div><p class="wn-feature-name">Sleep Timer Support</p><p class="wn-feature-desc">Set a countdown timer to automatically stop audio playback — perfect for night listening.</p></div></div>
+          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#FFF7ED;">🖼️</div><div><p class="wn-feature-name">Multi-Select on Album Art</p><p class="wn-feature-desc">Press and hold on album art to select multiple tracks for batch queueing and playlist management.</p></div></div>
         </div>
       </div>
       <div class="wn-divider"></div>
       <div>
-        <p class="wn-section-title">⚡ Improvements &amp; Bug Fixes</p>
+        <p class="wn-section-title">⚡ Improvements &amp; Enhancements</p>
         <div class="wn-features-list">
-          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#F0FDF4;">✅</div><div><p class="wn-feature-name">Album Art Size Fixed</p><p class="wn-feature-desc">Inconsistent artwork sizing in Queue and Lyrics view resolved.</p></div></div>
-          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#F0FDF4;">⚡</div><div><p class="wn-feature-name">Faster App Launch</p><p class="wn-feature-desc">Splash screen is quicker, blank screen on startup is gone.</p></div></div>
-          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#F0FDF4;">🔧</div><div><p class="wn-feature-name">Seek Bar &amp; Playback Fixes</p><p class="wn-feature-desc">Accurate progress tracking — overlap issues fully fixed.</p></div></div>
-          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#F0FDF4;">🔋</div><div><p class="wn-feature-name">Better Battery Efficiency</p><p class="wn-feature-desc">Optimised background processing for longer listening sessions.</p></div></div>
-          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#F0FDF4;">🛡️</div><div><p class="wn-feature-name">Stable Queue &amp; Lyrics Navigation</p><p class="wn-feature-desc">Unwanted screen closing fixed for uninterrupted listening.</p></div></div>
+          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#F0FDF4;">📦</div><div><p class="wn-feature-name">Compact 12 MB App Size</p><p class="wn-feature-desc">Highly optimized build size for faster updates and lightweight resource usage.</p></div></div>
+          <div class="wn-feature-item"><div class="wn-feature-icon" style="background:#F0FDF4;">⚡</div><div><p class="wn-feature-name">Refined Performance &amp; Stability</p><p class="wn-feature-desc">Faster local media store indexing and overall smoother playback responsiveness.</p></div></div>
         </div>
       </div>
       <div class="wn-footer-note">
-        <strong>🌍 A New Era for Offline Music</strong><br>
-        Melodika now delivers one of the most advanced offline lyric systems in any music player — word-level karaoke, completely offline.
+        <strong>🌍 Melodika v3.0.0</strong><br>
+        Built for pure, distraction-free offline audio playback with high-end UI craftsmanship.
       </div>
     </div>
   </div>
